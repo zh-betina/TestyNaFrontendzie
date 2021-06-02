@@ -1,11 +1,11 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import styled from "styled-components";
-import { ReactComponent as Loading } from "../assets/icons/loading.svg";
+import Loading from "../assets/icons/loading.svg";
 
 const AnimationContainer = styled.div`
   animation: spin 1s linear infinite;
-  height: 50px;
-  width: 50px;
+  height: 25px;
+  width: 25px;
 
   @keyframes spin {
     100% {
@@ -14,7 +14,7 @@ const AnimationContainer = styled.div`
   }
 `;
 
-const Loader = (): ReactElement => {
+const Loader = (): JSX.Element => {
   return (
     <AnimationContainer>
       <Loading height={50} width={50} />
