@@ -1,0 +1,4 @@
+/dist/
+/cypress/plugins/
+
+index.d.ts
