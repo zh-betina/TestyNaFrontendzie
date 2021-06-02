@@ -11,7 +11,7 @@ describe("getDurationInMonths", () => {
   it.each`
     daysNumber | expected
     ${42}      | ${"about 1 months"}
-    ${40}      | ${"about 2 months"}
+    ${40}      | ${"about 1 months"}
     ${45}      | ${"about 2 months"}
     ${57}      | ${"about 2 months"}
     ${76}      | ${"about 3 months"}
