@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getDurationInTime should return time between two dates with hours, minutes and seconds 1`] = `
+Object {
+  "hours": 3,
+  "minutes": 30,
+  "seconds": 21,
+}
+`;
