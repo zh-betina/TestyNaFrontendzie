@@ -16,5 +16,8 @@
     "noEmit": true,
     "jsx": "react"
   },
-  "include": ["src", "cypress"]
+  "include": [
+    "src",
+    "client/cypress"
+  ]
 }

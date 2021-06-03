@@ -6,7 +6,8 @@ export const getCurrentTheBestPromotion = (
   const currentDate = new Date();
 
   const currentPromotions = promotions.filter(
-    (prom) => prom.dateStart < currentDate && prom.dateEnd > currentDate
+    (prom: Promotion) =>
+      prom.dateStart < currentDate && prom.dateEnd > currentDate
   );
 
   if (!currentPromotions) {

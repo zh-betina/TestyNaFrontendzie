@@ -1,4 +1,4 @@
-import checkoutMachine from ".";
+import checkoutMachine from "./index";
 import { ShipmentMethod } from "../types/ShipmentMethod";
 
 export const getSum = (state: typeof checkoutMachine): number =>
