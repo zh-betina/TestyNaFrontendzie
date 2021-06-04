@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Loader from "../atoms/Loader";
 import Container from "../templates/Container";
-import Tick from "../assets/icons/tick.svg";
+import tickIcon from "../assets/icons/tick.svg";
 
 const SuccessMessage = styled.div`
   height: 300px;
@@ -27,7 +27,7 @@ const Summary = (): JSX.Element => {
       <SuccessMessage>
         {success ? (
           <>
-            <Tick height={50} />
+            <img src={tickIcon} alt='tick-svg' height={50} />
             <h2>Płatność zakończona pomyślnie.</h2>
             <h4>
               Dziękujęmy za zakupy w naszym sklepie. Numer Twojego zamówienia to

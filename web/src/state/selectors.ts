@@ -1,8 +1,8 @@
-import checkoutMachine from "./index";
+import checkoutMachine, {CartItem} from "./index";
 import { ShipmentMethod } from "../types/ShipmentMethod";
 
 export const getSum = (state: typeof checkoutMachine): number =>
-  state.context.cart.reduce((sum, elem) => sum + elem.price * elem.quantity, 0);
+  state.context.cart.reduce((sum: number, elem: CartItem) => sum + elem.price * elem.quantity, 0);
 
 export const getDelivery = (
   state: typeof checkoutMachine
@@ -11,7 +11,7 @@ export const getDelivery = (
 export const getDiscounts = (state: typeof checkoutMachine): number => {
   const discount = state.context.appliedDiscount?.percentage ?? 0;
   const sum = state.context.cart.reduce(
-    (acc, elem) => acc + elem.price * elem.quantity,
+    (acc: number, elem: CartItem) => acc + elem.price * elem.quantity,
     0
   );
   return (sum * discount) / 100;
