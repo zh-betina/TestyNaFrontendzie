@@ -31,9 +31,9 @@ declare module '*.less';
 declare module '*.styl';
 
 /* IMAGES */
-declare module '*.svg' {
-    const ref: string;
-    export default ref;
+declare module "*.svg" {
+    const content: any;
+    export default content;
 }
 declare module '*.bmp' {
     const ref: string;
