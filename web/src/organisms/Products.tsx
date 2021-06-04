@@ -11,7 +11,7 @@ export const Products = (): JSX.Element => {
     endpoints.getProducts
   );
   const products = data?.data;
-  if (true || loading || !data || !products) return <Loader />;
+  if ( loading || !data || !products) return <Loader />;
 
   if (error) return <div>Error! ${error}</div>;
 
