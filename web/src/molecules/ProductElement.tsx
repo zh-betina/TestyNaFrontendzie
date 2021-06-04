@@ -20,19 +20,19 @@ export const ProductElement = ({
   const { cart } = current.context;
 
   const addToCart = () => {
-    send("ADD_PRODUCT", { productId: product.id });
+    send("ADD_PRODUCT", { productId: product._id });
   };
 
   const removeFromCart = () => {
-    send("REMOVE_PRODUCT", { productId: product.id });
+    send("REMOVE_PRODUCT", { productId: product._id });
   };
 
-  const inCart = cart.some((item) => item.id === product.id);
+  const inCart = cart.some((item) => item.id === product._id);
 
   return (
     <MainContainer>
       <NameContainer>
-        {product.name} - {product.manufacturer}
+        {product.name} - {product.brand}
       </NameContainer>
       <PriceContainer>{displayPrice(product.price)}</PriceContainer>
       {inCart ? (

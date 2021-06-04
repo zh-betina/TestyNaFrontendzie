@@ -7,7 +7,7 @@ import ShoppingCartImage from "../assets/icons/shopping-cart.png";
 import { MachineContext } from "../MachineContext";
 import Image from "../atoms/Image";
 
-export const Header = (): ReactElement => {
+export const Header = (): JSX.Element => {
   const history = useHistory();
 
   const machine = useContext(MachineContext);
