@@ -32,8 +32,8 @@ export const ProductElement = ({
   const inCart = cart.some((item) => item.id === product._id);
 
   return (
-    <MainContainer onClick={() => history.push(`/product/${product._id}`)}>
-      <NameContainer>
+    <MainContainer>
+      <NameContainer onClick={() => history.push(`/product/${product._id}`)}>
         {product.name} - {product.brand}
       </NameContainer>
       <PriceContainer>{displayPrice(product.price)}</PriceContainer>

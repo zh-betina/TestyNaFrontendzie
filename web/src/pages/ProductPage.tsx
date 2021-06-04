@@ -1,11 +1,11 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
 import Container from "../templates/Container";
 import { useAxiosGet } from "../hooks/useAxiosGet";
 import { endpoints } from "../api/endpoints";
 import { Product } from "../types/Product";
 import Loader from "../atoms/Loader";
+import { Comments } from "../organisms/Comments";
 
 type ProductPageParams = {
   id: string;
@@ -18,18 +18,17 @@ export const ProductPage = (): JSX.Element => {
     method: endpoints.getProduct.method,
   });
 
-  console.log("HERE: ", loading, data);
   if (loading || !data) return <Loader />;
 
   if (error) return <div>Error! ${error}</div>;
 
   return (
     <Container>
-      <div>{data.name}</div>
-      <div>{data.price}</div>
-      <div>{data.brand}</div>
+      <h1>
+        {data.name} - {data.price / 100}zł
+      </h1>
+      <div>Marka: {data.brand}</div>
+      <Comments productId={data._id} />
     </Container>
   );
 };
-
-const ProductName = styled;
