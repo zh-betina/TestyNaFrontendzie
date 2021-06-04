@@ -1,3 +1,5 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import "regenerator-runtime/runtime";
 import React from "react";
 import { useMachine } from "@xstate/react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -9,6 +11,7 @@ import Payment from "./pages/Payment";
 import Summary from "./pages/Summary";
 import { Home } from "./pages/Home";
 import checkoutMachine from "./state";
+import { ProductPage } from "./pages/ProductPage";
 
 function App(): JSX.Element {
   const [, , service] = useMachine(checkoutMachine);
@@ -30,6 +33,9 @@ function App(): JSX.Element {
           </Route>
           <Route path="/summary">
             <Summary />
+          </Route>
+          <Route path="/product/:id">
+            <ProductPage />
           </Route>
         </Switch>
       </Router>

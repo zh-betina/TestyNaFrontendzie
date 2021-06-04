@@ -1,4 +1,5 @@
 import { useService } from "@xstate/react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import React, { useContext } from "react";
 import { Product } from "../types/Product";
@@ -15,6 +16,7 @@ type ProductElementProps = {
 export const ProductElement = ({
   product,
 }: ProductElementProps): JSX.Element => {
+  const history = useHistory();
   const machine = useContext(MachineContext);
   const [current, send] = useService(machine);
   const { cart } = current.context;
@@ -30,7 +32,7 @@ export const ProductElement = ({
   const inCart = cart.some((item) => item.id === product._id);
 
   return (
-    <MainContainer>
+    <MainContainer onClick={() => history.push(`/product/${product._id}`)}>
       <NameContainer>
         {product.name} - {product.brand}
       </NameContainer>
@@ -52,6 +54,11 @@ const MainContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 20px;
+
+  cursor: pointer;
+  :hover {
+    background: silver;
+  }
 `;
 
 const NameContainer = styled.div`
