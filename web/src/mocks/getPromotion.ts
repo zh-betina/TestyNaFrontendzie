@@ -22,9 +22,9 @@ export const getPromotions = (): Promotion[] => [
     id: "3",
     name: "Dzień dziecka",
     description:
-      "Z okazji dnia dziecka mamy dla Ciebie kod rabatowy! Użyj kodu rabatowego i skorzystaj z -30% na wszystkie produkty!",
-    discount: { code: "DZIEN_DZIECKA_2021", percentage: 30 },
+      "Z okazji dnia dziecka mamy dla Ciebie kod rabatowy! Użyj kodu rabatowego i skorzystaj z -45% na wszystkie produkty!",
+    discount: { code: "DZIEN_DZIECKA_2021", percentage: 45 },
     dateStart: new Date("2021-06-01"),
-    dateEnd: new Date("2021-06-02 24:00"),
+    dateEnd: new Date("2021-06-25 24:00"),
   },
 ];

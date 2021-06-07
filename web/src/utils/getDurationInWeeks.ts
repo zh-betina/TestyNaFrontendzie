@@ -4,12 +4,8 @@ import {
 } from "../types/PromotionDurationType";
 
 export const getDurationInWeeks = (days: number): PromotionDurationOutput => {
-  if (days > 30) {
-    throw new Error("Provided days should be shorter than 30");
-  }
-
-  if (days < 10) {
-    throw new Error("Provided days should be greater than 10");
+  if (Number.isNaN(days)) {
+    throw new Error("Days should be number");
   }
 
   const approximateNumberOfWeeks = Math.round(days / 7);

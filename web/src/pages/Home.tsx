@@ -4,7 +4,8 @@ import { Products } from "../organisms/Products";
 import Container from "../templates/Container";
 import ListHeader from "../atoms/ListHeader";
 import { Header } from "../organisms/Header";
-import { PromotionBanner } from "../organisms/PromotionBanner";
+import { PromotionBanner } from "../organisms/PromotionBanner/PromotionBanner";
+import PromotionBannerWrapper from "../organisms/PromotionBanner/PromotionBannerWrapper";
 
 export const Home = (): JSX.Element => {
   const [showPromotionBanner, setShowPromotionBanner] =
@@ -20,7 +21,9 @@ export const Home = (): JSX.Element => {
     <>
       {showPromotionBanner ? (
         <Container>
-          <PromotionBanner onClose={() => setShowPromotionBanner(false)} />
+          <PromotionBannerWrapper
+            onClose={() => setShowPromotionBanner(false)}
+          />
         </Container>
       ) : null}
       <Container>

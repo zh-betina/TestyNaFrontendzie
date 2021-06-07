@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 
 type Props = {
   submit: (commentForm: CommentFormState) => void;
@@ -18,12 +19,12 @@ export const NewCommentForm = ({ submit }: Props) => {
     setCommentForm({ ...commentForm, userName: event.currentTarget.value });
   };
 
-  const commentChange = (event: React.FormEvent<HTMLInputElement>) => {
+  const commentChange = (event: React.FormEvent<HTMLTextAreaElement>) => {
     setCommentForm({ ...commentForm, comment: event.currentTarget.value });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <label htmlFor="userName">
         Twoje imię:
         <input
@@ -33,16 +34,16 @@ export const NewCommentForm = ({ submit }: Props) => {
           onChange={nameChange}
         />
       </label>
-      <label>
+      <label htmlFor="comment">
         Komentarz:
-        <input
-          type="text"
+        <textarea
+          id="comment"
           value={commentForm.comment}
           onChange={commentChange}
         />
       </label>
       <input type="submit" value="Dodaj nowy" />
-    </form>
+    </Form>
   );
 };
 
@@ -50,3 +51,49 @@ export type CommentFormState = {
   userName: string;
   comment: string;
 };
+
+const Form = styled.form`
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+
+  & > label {
+    padding: 10px;
+
+    & > input,
+    & > textarea {
+      margin-left: 20px;
+      width: 300px;
+      height: 30px;
+      border: orange 2px solid;
+      border-radius: 10px;
+
+      &:hover {
+        border: #8d5d01 2px solid;
+      }
+    }
+
+    & > textarea {
+      height: 150px;
+      resize: none;
+    }
+  }
+
+  & > input[type="submit"] {
+    padding: 10px;
+    height: 40px;
+    background: aqua;
+    border: black 1px solid;
+    border-radius: 10px;
+    outline: none;
+
+    &:hover {
+      background: #56cdcd;
+    }
+
+    &:active {
+      background: #095a5a;
+    }
+  }
+`;

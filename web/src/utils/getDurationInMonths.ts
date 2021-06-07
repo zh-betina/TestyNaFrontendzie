@@ -4,8 +4,8 @@ import {
 } from "../types/PromotionDurationType";
 
 export const getDurationInMonths = (days: number): PromotionDurationOutput => {
-  if (days < 30) {
-    throw new Error("Days should be greater than 30");
+  if (Number.isNaN(Number(days))) {
+    throw new Error("Days should be number");
   }
 
   const approximateNumberOfMonths = Math.round(days / 30);
