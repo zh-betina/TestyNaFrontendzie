@@ -38,7 +38,7 @@ const ListElement = ({
         <Button disabled={product.quantity < 1} onClick={onRemove}>
           -1
         </Button>
-        {product.quantity}
+        <span>{product.quantity}</span>
         <Button onClick={onAdd}>+1</Button>
       </Cell>
       <Cell>{displayPrice(product.price * product.quantity)}</Cell>
