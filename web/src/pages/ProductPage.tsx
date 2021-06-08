@@ -6,6 +6,9 @@ import { endpoints } from "../api/endpoints";
 import { Product } from "../types/Product";
 import Loader from "../atoms/Loader";
 import { Comments } from "../organisms/Comments";
+import { Name, Rest, Row } from "../atoms/Row";
+import NavigationButton from "../atoms/NavigationButton";
+import ListHeader from "../atoms/ListHeader";
 
 type ProductPageParams = {
   id: string;
@@ -28,7 +31,14 @@ export const ProductPage = (): JSX.Element => {
         {data.name} - {data.price / 100}zł
       </h1>
       <div>Marka: {data.brand}</div>
+      <ListHeader />
       <Comments productId={data._id} />
+      <ListHeader />
+      <Row>
+        <Name>
+          <NavigationButton to="/">{"<<"} Lista produktów </NavigationButton>
+        </Name>
+      </Row>
     </Container>
   );
 };

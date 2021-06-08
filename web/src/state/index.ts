@@ -2,6 +2,7 @@ import { assign, createMachine } from "xstate";
 import { Address } from "../types/Address";
 import { availableDiscounts, Discount } from "../types/Discount";
 import { shipmentMethods, ShipmentMethod } from "../types/ShipmentMethod";
+import { findProductById } from "../mocks/getProducts";
 // import { API } from "../api/api";
 
 export interface CartItem {
@@ -61,22 +62,19 @@ const checkoutMachine = createMachine<CheckoutState, CheckoutEvents>({
         ADD_PRODUCT: {
           actions: assign({
             cart: (context, event) => {
-              return context.cart;
-              // TODO: We should run it async.
+              const prodToAdd = findProductById(event.productId);
 
-              // const prodToAdd = await API.getProductById(event.productId);
-              //
-              // if (!prodToAdd) {
-              //   return context.cart;
-              // }
-              //
-              // const newCartItem: CartItem = {
-              //   id: prodToAdd._id,
-              //   quantity: 1,
-              //   name: `${prodToAdd.name} - ${prodToAdd.brand}`,
-              //   price: prodToAdd.price,
-              // };
-              // return [newCartItem, ...context.cart];
+              if (!prodToAdd) {
+                return context.cart;
+              }
+
+              const newCartItem: CartItem = {
+                id: prodToAdd._id,
+                quantity: 1,
+                name: `${prodToAdd.name} - ${prodToAdd.brand}`,
+                price: prodToAdd.price,
+              };
+              return [newCartItem, ...context.cart];
             },
           }),
         },

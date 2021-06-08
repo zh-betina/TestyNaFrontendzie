@@ -25,23 +25,29 @@ export const NewCommentForm = ({ submit }: Props) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <label htmlFor="userName">
-        Twoje imię:
-        <input
-          id="userName"
-          type="text"
-          value={commentForm.userName}
-          onChange={nameChange}
-        />
-      </label>
-      <label htmlFor="comment">
-        Komentarz:
-        <textarea
-          id="comment"
-          value={commentForm.comment}
-          onChange={commentChange}
-        />
-      </label>
+      <FormInputs>
+        <div>
+          <label htmlFor="userName">
+            <span>Twoje imię:</span>
+          <input
+            id="userName"
+            type="text"
+            value={commentForm.userName}
+            onChange={nameChange}
+          />
+          </label>
+        </div>
+        <div>
+          <label htmlFor="comment">
+            <span>Komentarz:</span>
+          <textarea
+            id="comment"
+            value={commentForm.comment}
+            onChange={commentChange}
+          />
+          </label>
+        </div>
+      </FormInputs>
       <input type="submit" value="Dodaj nowy" />
     </Form>
   );
@@ -58,42 +64,64 @@ const Form = styled.form`
   justify-content: center;
   flex-direction: column;
 
-  & > label {
-    padding: 10px;
+  & > div > div {
+    width: 100%;
+    padding: 5px;
+  }
 
-    & > input,
-    & > textarea {
-      margin-left: 20px;
-      width: 300px;
-      height: 30px;
-      border: orange 2px solid;
-      border-radius: 10px;
+  & label {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
 
-      &:hover {
-        border: #8d5d01 2px solid;
-      }
-    }
+  & input,
+  & textarea {
+    padding: 5px;
+    flex-grow: 1;
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 30px;
+    border: 1px solid lightslategrey;
+    border-radius: 2px;
 
-    & > textarea {
-      height: 150px;
-      resize: none;
+    &:focus {
+      outline: 1px solid #55606d;
     }
   }
 
-  & > input[type="submit"] {
+  & textarea {
+    height: 150px;
+    resize: none;
+  }
+
+  & input[type="submit"] {
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 0;
+    margin-top: 10px;
+    width: 100%;
     padding: 10px;
     height: 40px;
-    background: aqua;
+    background: #008000;
     border: black 1px solid;
-    border-radius: 10px;
     outline: none;
 
     &:hover {
-      background: #56cdcd;
+      background: #5f6666;
     }
 
     &:active {
       background: #095a5a;
     }
   }
+`;
+
+const FormInputs = styled.div`
+  border: 1px solid #000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
 `;

@@ -1,13 +1,11 @@
 import { Promotion } from "../types/Promotion";
 
-export const getCurrentTheBestPromotion = (
+export const getTheBestPromotionForDate = (
+  date: Date,
   promotions: Promotion[]
 ): Promotion | null => {
-  const currentDate = new Date();
-
   const currentPromotions = promotions.filter(
-    (prom: Promotion) =>
-      prom.dateStart < currentDate && prom.dateEnd > currentDate
+    (prom: Promotion) => prom.dateStart < date && prom.dateEnd > date
   );
 
   if (!currentPromotions) {

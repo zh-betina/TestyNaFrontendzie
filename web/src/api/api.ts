@@ -15,5 +15,4 @@ export const API: { [key: string]: ApiTypes } = {
   },
 };
 
-
-type ApiTypes = (id: string) => Promise<Product | undefined>
+type ApiTypes = (id: string) => Promise<Product | undefined>;
