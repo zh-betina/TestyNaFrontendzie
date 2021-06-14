@@ -1,6 +1,7 @@
 import { useSelector, useService } from "@xstate/react";
 import React, { useContext } from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 import { Cell, Name, Row } from "../atoms/Row";
 import ListElement from "../molecules/ListElement";
 import { displayPrice } from "../utils/money";
@@ -25,6 +26,7 @@ const Info = styled.section`
 `;
 
 const CartList = (): JSX.Element => {
+  const { t } = useTranslation();
   const machine = useContext(MachineContext);
   const [current, send] = useService(machine);
   const sum = useSelector(machine, getSum);
@@ -32,7 +34,7 @@ const CartList = (): JSX.Element => {
   const { cart } = current.context;
 
   if (cart.length === 0) {
-    return <Info>Twój koszyk jest pusty</Info>;
+    return <Info>{t("Your cart is empty")}</Info>;
   }
 
   return (
@@ -50,7 +52,7 @@ const CartList = (): JSX.Element => {
       <SumRow />
       <DiscountRow />
       <Row>
-        <Name>Do zapłaty:</Name>
+        <Name>{t("To pay")}:</Name>
         <Cell>{displayPrice(sum - discountValue)}</Cell>
       </Row>
     </>

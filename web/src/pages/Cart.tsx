@@ -1,5 +1,6 @@
 import { useService } from "@xstate/react";
 import React, { useContext } from "react";
+import { useTranslation } from "react-i18next";
 import { MachineContext } from "../MachineContext";
 import ListHeader from "../atoms/ListHeader";
 import NavigationButton from "../atoms/NavigationButton";
@@ -11,6 +12,7 @@ import TotalRow from "../molecules/TotalRow";
 import Container from "../templates/Container";
 
 const Cart = (): JSX.Element => {
+  const { t } = useTranslation();
   const machine = useContext(MachineContext);
   const [, send] = useService(machine);
 
@@ -20,18 +22,20 @@ const Cart = (): JSX.Element => {
 
   return (
     <Container>
-      <ListHeader>Koszyk:</ListHeader>
+      <ListHeader>{t("Cart")}:</ListHeader>
       <CartList />
       <Discount />
       <Delivery />
       <TotalRow />
       <Row>
         <Name>
-          <NavigationButton to="/">{"<<"} Lista produktów </NavigationButton>
+          <NavigationButton to="/">
+            {"<<"} {t("Products List")}
+          </NavigationButton>
         </Name>
         <Rest>
           <NavigationButton to="/address" onClick={handleNextNavigation}>
-            Adres {">>"}
+            {t("Address")} {">>"}
           </NavigationButton>
         </Rest>
       </Row>

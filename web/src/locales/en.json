@@ -1,0 +1,14 @@
+{
+  "Products": "Products",
+  "Cart": "Cart",
+  "Delivery": "Delivery",
+  "Products List": "Products List",
+  "Address": "Address",
+  "Your cart is empty": "Your cart is empty",
+  "To pay": "To pay",
+  "Summary": "Summary",
+  "Pay with a card": "Pay with a card",
+  "Brand": "Brand",
+  "Payment successfully completed.": "Payment successfully completed.",
+  "Thank you for shopping at our store. Your order number is #{code}": "Thank you for shopping at our store. Your order number is #{{code}}"
+}

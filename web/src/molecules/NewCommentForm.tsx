@@ -29,22 +29,22 @@ export const NewCommentForm = ({ submit }: Props) => {
         <div>
           <label htmlFor="userName">
             <span>Twoje imię:</span>
-          <input
-            id="userName"
-            type="text"
-            value={commentForm.userName}
-            onChange={nameChange}
-          />
+            <input
+              id="userName"
+              type="text"
+              value={commentForm.userName}
+              onChange={nameChange}
+            />
           </label>
         </div>
         <div>
           <label htmlFor="comment">
             <span>Komentarz:</span>
-          <textarea
-            id="comment"
-            value={commentForm.comment}
-            onChange={commentChange}
-          />
+            <textarea
+              id="comment"
+              value={commentForm.comment}
+              onChange={commentChange}
+            />
           </label>
         </div>
       </FormInputs>

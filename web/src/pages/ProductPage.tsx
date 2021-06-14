@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Container from "../templates/Container";
 import { useAxiosGet } from "../hooks/useAxiosGet";
 import { endpoints } from "../api/endpoints";
@@ -15,6 +16,7 @@ type ProductPageParams = {
 };
 
 export const ProductPage = (): JSX.Element => {
+  const { t } = useTranslation();
   const { id } = useParams<ProductPageParams>();
   const [data, loading, error] = useAxiosGet<Product>({
     url: `${endpoints.getProduct.url}/${id}`,
@@ -30,13 +32,17 @@ export const ProductPage = (): JSX.Element => {
       <h1>
         {data.name} - {data.price / 100}zł
       </h1>
-      <div>Marka: {data.brand}</div>
+      <div>
+        {t("Brand")}: {data.brand}
+      </div>
       <ListHeader />
       <Comments productId={data._id} />
       <ListHeader />
       <Row>
         <Name>
-          <NavigationButton to="/">{"<<"} Lista produktów </NavigationButton>
+          <NavigationButton to="/">
+            {"<<"} {t("Products List")}
+          </NavigationButton>
         </Name>
       </Row>
     </Container>

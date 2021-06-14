@@ -1,0 +1,14 @@
+{
+    "Products": "Produkty",
+    "Cart": "Koszyk",
+    "Delivery": "Dostawa",
+    "Products List": "Lista produktów",
+    "Address": "Adres",
+    "Your cart is empty": "Twój koszyk jest pusty",
+    "To pay": "Do zapłaty",
+    "Summary": "Podsumowanie",
+    "Pay with a card": "Zapłać kartą",
+    "Brand": "Marka",
+    "Payment successfully completed.": "Płatność zakończona pomyślnie.",
+    "Thank you for shopping at our store. Your order number is #{code}": "Dziękujęmy za zakupy w naszym sklepie. Numer Twojego zamówienia to #{{code}}"
+}

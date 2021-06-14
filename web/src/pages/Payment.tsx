@@ -1,5 +1,6 @@
 import { useService } from "@xstate/react";
 import React, { useContext } from "react";
+import { useTranslation } from "react-i18next";
 
 import styled from "styled-components";
 import ListHeader from "../atoms/ListHeader";
@@ -23,16 +24,17 @@ const CartSection = styled.div`
 `;
 
 const Payment = (): JSX.Element => {
+  const { t } = useTranslation();
   const machine = useContext(MachineContext);
   const [current, send] = useService(machine);
   const { cart, address } = current.context;
 
   return (
     <Container>
-      <ListHeader>Podsumowanie</ListHeader>
+      <ListHeader>{t("Summary")}</ListHeader>
       <Row>
         <CartSection>
-          <Subtitle>Koszyk:</Subtitle>
+          <Subtitle>{t("Cart")}:</Subtitle>
           {cart.map((product) => (
             <Row key={product.id}>
               <Name>{product.name}</Name>
@@ -51,7 +53,7 @@ const Payment = (): JSX.Element => {
       <Row>
         <Rest>
           <NavigationButton to="/summary" onClick={() => send("SUCCESS")}>
-            Zapłać kartą **0349{" "}
+            {t("Pay with a card")} **0349
           </NavigationButton>
         </Rest>
       </Row>
