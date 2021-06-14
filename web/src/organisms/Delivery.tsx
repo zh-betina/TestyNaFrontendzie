@@ -1,5 +1,6 @@
 import { useSelector, useService } from "@xstate/react";
 import React, { useContext } from "react";
+import { useTranslation } from "react-i18next";
 
 import styled from "styled-components";
 import ListHeader from "../atoms/ListHeader";
@@ -14,6 +15,7 @@ const DeliveryContainer = styled.section`
 `;
 
 const Delivery = (): JSX.Element => {
+  const { t } = useTranslation();
   const machine = useContext(MachineContext);
   const [current, send] = useService(machine);
   const shipment = current.context.shipmentMethod;
@@ -21,7 +23,7 @@ const Delivery = (): JSX.Element => {
 
   return (
     <DeliveryContainer>
-      <ListHeader>Dostawa</ListHeader>
+      <ListHeader>{t("Delivery")}</ListHeader>
       {shipmentMethods.map((method) => (
         <Row key={method.type}>
           <Name>
