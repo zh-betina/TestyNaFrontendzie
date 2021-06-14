@@ -15,7 +15,10 @@ const DeliveryContainer = styled.section`
 `;
 
 const Delivery = (): JSX.Element => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const machine = useContext(MachineContext);
   const [current, send] = useService(machine);
   const shipment = current.context.shipmentMethod;
@@ -38,7 +41,7 @@ const Delivery = (): JSX.Element => {
                   send("CHOOSE_SHIPMENT", { methodType: method.type })
                 }
               />
-              {method.name}
+              {method.name[language]}
             </label>
           </Name>
           <Cell>

@@ -14,7 +14,7 @@
   "Your address": "Your address",
   "First name": "First name",
   "Last name": "Last name",
-  "Street": "UliStreetca",
+  "Street": "Street",
   "Postal code": "Postal code",
   "City": "City",
   "Payment": "Payment",
@@ -26,5 +26,13 @@
   "Comment": "Comment",
   "Add a new one": "Add a new one",
   "Discount": "Discount",
-  "Delivery address": "Shipment address"
+  "Delivery address": "Shipment address",
+  "USE THE DISCOUNT CODE": "USE THE DISCOUNT CODE",
+  "SPECIAL OFFER": "SPECIAL OFFER",
+  "The promotion runs for {value}": "The promotion runs for {{value}}.",
+  "about {value} days": "about {{value}} days",
+  "about {value} weeks": "about {{value}} weeks",
+  "about {value} hours": "about {{value}} hours",
+  "about {value} months": "about {{value}} months",
+  "free": "free"
 }

@@ -15,7 +15,7 @@ export const getProducts = (): Product[] => {
       _id: "2",
       name: {
         pl: "Koszulka sportowa",
-        en: "Sports T-shirt'",
+        en: "Sports T-shirt",
       },
       brand: "Nike",
       price: 5000,

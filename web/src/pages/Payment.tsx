@@ -24,7 +24,10 @@ const CartSection = styled.div`
 `;
 
 const Payment = (): JSX.Element => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const machine = useContext(MachineContext);
   const [current, send] = useService(machine);
   const { cart, address } = current.context;
@@ -37,7 +40,9 @@ const Payment = (): JSX.Element => {
           <Subtitle>{t("Cart")}:</Subtitle>
           {cart.map((product) => (
             <Row key={product.id}>
-              <Name>{product.name}</Name>
+              <Name>
+                {product.name[language]} - {product.brand}
+              </Name>
               <Cell>{product.quantity}</Cell>
               <Cell>{displayPrice(product.price)}</Cell>
               <Cell>{displayPrice(product.price * product.quantity)}</Cell>

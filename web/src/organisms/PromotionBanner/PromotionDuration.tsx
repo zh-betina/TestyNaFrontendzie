@@ -1,4 +1,5 @@
 import React from "react";
+import { TFunction, useTranslation } from "react-i18next";
 import { getPromotionDuration } from "../../utils/getPromotionDuration";
 import { Promotion } from "../../types/Promotion";
 import {
@@ -11,30 +12,42 @@ type PromotionDurationProps = {
   promotion: Promotion;
 };
 export const PromotionDuration = ({ promotion }: PromotionDurationProps) => {
+  const { t } = useTranslation();
   const promotionDuration = getPromotionDuration(new Date(), promotion.dateEnd);
   return (
     <div>
-      {`Promocja trwa jeszcze ${getPromotionDurationInText(promotionDuration)}`}
+      {t("The promotion runs for {value}", {
+        value: getPromotionDurationInText(promotionDuration, t),
+      })}
     </div>
   );
 };
 
 const getPromotionDurationInText = (
-  promotionDuration: PromotionDurationOutput
+  promotionDuration: PromotionDurationOutput,
+  translate: TFunction
 ) => {
   switch (promotionDuration.type) {
     case PromotionDurationType.days:
-      return `około ${promotionDuration.value} dni`;
+      return translate("about {value} days", {
+        value: promotionDuration.value,
+      });
     case PromotionDurationType.time:
       return `${(promotionDuration.value as Time).hours}:${
         (promotionDuration.value as Time).minutes
       }:${(promotionDuration.value as Time).seconds}`;
     case PromotionDurationType.hours:
-      return `około ${promotionDuration.value} godzin`;
+      return translate("about {value} hours", {
+        value: promotionDuration.value,
+      });
     case PromotionDurationType.weeks:
-      return `około ${promotionDuration.value} tygodni`;
+      return translate("about {value} weeks", {
+        value: promotionDuration.value,
+      });
     case PromotionDurationType.months:
-      return `około ${promotionDuration.value} miesięcy`;
+      return translate("about {value} months", {
+        value: promotionDuration.value,
+      });
     default:
       return "";
   }

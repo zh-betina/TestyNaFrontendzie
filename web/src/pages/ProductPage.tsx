@@ -16,7 +16,10 @@ type ProductPageParams = {
 };
 
 export const ProductPage = (): JSX.Element => {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const { id } = useParams<ProductPageParams>();
   const [data, loading, error] = useAxiosGet<Product>({
     url: `${endpoints.getProduct.url}/${id}`,
@@ -30,7 +33,7 @@ export const ProductPage = (): JSX.Element => {
   return (
     <Container>
       <h1>
-        {data.name} - {data.price / 100}zł
+        {data.name[language]} - {data.price / 100}zł
       </h1>
       <div>
         {t("Brand")}: {data.brand}

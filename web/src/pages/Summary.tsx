@@ -32,7 +32,6 @@ const Summary = (): JSX.Element => {
             <img src={tickIcon} alt="tick-svg" height={50} />
             <h2>{t("Payment successfully completed.")}</h2>
             <h4>
-              s
               {t(
                 "Thank you for shopping at our store. Your order number is #{code}",
                 {

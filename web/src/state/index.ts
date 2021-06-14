@@ -7,7 +7,8 @@ import { findProductById } from "../mocks/getProducts";
 
 export interface CartItem {
   id: string;
-  name: string;
+  name: { [key: string]: string };
+  brand: string;
   price: number;
   quantity: number;
 }
@@ -71,7 +72,8 @@ const checkoutMachine = createMachine<CheckoutState, CheckoutEvents>({
               const newCartItem: CartItem = {
                 id: prodToAdd._id,
                 quantity: 1,
-                name: `${prodToAdd.name} - ${prodToAdd.brand}`,
+                name: prodToAdd.name,
+                brand: prodToAdd.brand,
                 price: prodToAdd.price,
               };
               return [newCartItem, ...context.cart];

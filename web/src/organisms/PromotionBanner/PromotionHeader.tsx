@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { Promotion } from "../../types/Promotion";
 
@@ -10,15 +11,20 @@ export const PromotionHeader = ({
   onClose,
   promotion,
 }: PromotionHeaderProps) => {
+  const { t, i18n } = useTranslation();
   const promotionPercentage = promotion.discount.percentage;
   const isSpecialOffer = () => promotionPercentage > 40;
   return (
     <>
       <CloseButton onClick={() => onClose()}>X</CloseButton>
-      <Description>{promotion.description}</Description>
-      <HeaderBanner>UŻYJ KODU RABATOWEGO</HeaderBanner>
+      <Description>
+        {promotion.description && promotion.description[i18n.language]}
+      </Description>
+      <HeaderBanner>{t("USE THE DISCOUNT CODE")}</HeaderBanner>
       {isSpecialOffer() ? (
-        <div>OFERTA SPECJALNA - {promotionPercentage}%</div>
+        <div>
+          {t("SPECIAL OFFER")} - {promotionPercentage}%
+        </div>
       ) : null}
       <CodeContainer>{promotion.discount.code}</CodeContainer>
     </>

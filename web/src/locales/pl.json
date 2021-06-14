@@ -26,5 +26,13 @@
     "Comment": "Komentarz",
     "Add a new one": "Dodaj nowy",
     "Discount": "Rabat",
-    "Delivery address": "Adres dostawy"
+    "Delivery address": "Adres dostawy",
+    "USE THE DISCOUNT CODE": "UŻYJ KODU RABATOWEGO",
+    "SPECIAL OFFER": "OFERTA SPECJALNA",
+    "The promotion runs for {value}": "Promocja trwa jeszcze {{value}}.",
+    "about {value} days": "około {{value}} dni",
+    "about {value} weeks": "około {{value}} tygodni",
+    "about {value} hours": "około {{value}} godzin",
+    "about {value} months": "około {{value}} miesięcy",
+    "free": "darmowa"
 }
