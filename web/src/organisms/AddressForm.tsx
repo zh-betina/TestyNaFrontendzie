@@ -1,5 +1,6 @@
 import { useService } from "@xstate/react";
 import React, { useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import Input from "../atoms/Input";
 import NavigationButton from "../atoms/NavigationButton";
@@ -12,6 +13,7 @@ const Form = styled.form`
 `;
 
 const AddressForm = (): JSX.Element => {
+  const { t } = useTranslation();
   const machine = useContext(MachineContext);
   const [current, send] = useService(machine);
   const {
@@ -37,38 +39,38 @@ const AddressForm = (): JSX.Element => {
     <Form>
       <Input
         value={firstName}
-        placeholder="Imię"
+        placeholder={t("First name")}
         onChange={(event) => setFirstName(event.target.value)}
       />
       <Input
         value={lastName}
-        placeholder="Nazwisko"
+        placeholder={t("Last name")}
         onChange={(event) => setLastName(event.target.value)}
       />
       <Input
         value={street}
-        placeholder="Ulica"
+        placeholder={t("Street")}
         onChange={(event) => setStreet(event.target.value)}
       />
       <Input
         value={postalCode}
-        placeholder="Kod pocztowy"
+        placeholder={t("Postal code")}
         onChange={(event) => setPostalCode(event.target.value)}
       />
       <Input
         value={city}
-        placeholder="Miasto"
+        placeholder={t("City")}
         onChange={(event) => setCity(event.target.value)}
       />
       <Row>
         <Name>
           <NavigationButton to="/cart" onClick={handlePreviousClick}>
-            {"<<"} Koszyk{" "}
+            {"<<"} {t("Cart")}
           </NavigationButton>
         </Name>
         <Rest>
           <NavigationButton to="/payment" onClick={handleNextClick}>
-            Płatność {">>"}
+            {t("Payment")} {">>"}
           </NavigationButton>
         </Rest>
       </Row>

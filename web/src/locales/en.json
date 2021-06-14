@@ -10,5 +10,21 @@
   "Pay with a card": "Pay with a card",
   "Brand": "Brand",
   "Payment successfully completed.": "Payment successfully completed.",
-  "Thank you for shopping at our store. Your order number is #{code}": "Thank you for shopping at our store. Your order number is #{{code}}"
+  "Thank you for shopping at our store. Your order number is #{code}": "Thank you for shopping at our store. Your order number is #{{code}}",
+  "Your address": "Your address",
+  "First name": "First name",
+  "Last name": "Last name",
+  "Street": "UliStreetca",
+  "Postal code": "Postal code",
+  "City": "City",
+  "Payment": "Payment",
+  "Add a new comment": "Add a new comment",
+  "Add a discount code": "Add a discount code",
+  "Add a code": "Add a code",
+  "Total": "Total",
+  "Your name": "Your name",
+  "Comment": "Comment",
+  "Add a new one": "Add a new one",
+  "Discount": "Discount",
+  "Delivery address": "Shipment addess"
 }

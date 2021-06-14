@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { Subtitle } from "../atoms/Subtitle";
 import { Address } from "../types/Address";
@@ -21,10 +22,11 @@ const AddressBox = styled.div`
 `;
 
 const AddressDisplay = ({ address }: AddressDisplayProps): JSX.Element => {
+  const { t } = useTranslation();
   return (
     <AddressSection>
       <AddressBox>
-        <Subtitle>Adres dostawy:</Subtitle>
+        <Subtitle>{t("Delivery address")}:</Subtitle>
         <div>
           {address?.firstName} {address?.lastName}
         </div>

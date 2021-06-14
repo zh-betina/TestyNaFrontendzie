@@ -8,7 +8,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 
 const AnimationContainer = styled.div`
   animation: spin 1s linear infinite;
@@ -24,11 +24,11 @@ const AnimationContainer = styled.div`
 
 const Loader = (): JSX.Element => {
   return (
-      <Container>
-    <AnimationContainer>
-      <img alt={'loading-svg'} src={loading} height={50} width={50} />
-    </AnimationContainer>
-      </Container>
+    <Container>
+      <AnimationContainer>
+        <img alt="loading-svg" src={loading} height={50} width={50} />
+      </AnimationContainer>
+    </Container>
   );
 };
 

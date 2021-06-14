@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { format } from "date-fns";
+import { useTranslation } from "react-i18next";
 import { CommentFormState, NewCommentForm } from "../molecules/NewCommentForm";
 import { getCommentsForProduct } from "../mocks/getComments";
 
@@ -8,6 +9,7 @@ type Props = {
   productId: string;
 };
 export const Comments = ({ productId }: Props) => {
+  const { t } = useTranslation();
   const [showAddNewCommentBox, setShowAddNewCommentBox] =
     useState<boolean>(false);
   const [comments, setComments] = useState(getCommentsForProduct(productId));
@@ -45,7 +47,7 @@ export const Comments = ({ productId }: Props) => {
         <NewCommentForm submit={onSubmit} />
       ) : (
         <button type="button" onClick={() => setShowAddNewCommentBox(true)}>
-          Dodaj nowy komentarz
+          {t("Add a new comment")}
         </button>
       )}
     </div>

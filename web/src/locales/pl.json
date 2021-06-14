@@ -10,5 +10,21 @@
     "Pay with a card": "Zapłać kartą",
     "Brand": "Marka",
     "Payment successfully completed.": "Płatność zakończona pomyślnie.",
-    "Thank you for shopping at our store. Your order number is #{code}": "Dziękujęmy za zakupy w naszym sklepie. Numer Twojego zamówienia to #{{code}}"
+    "Thank you for shopping at our store. Your order number is #{code}": "Dziękujęmy za zakupy w naszym sklepie. Numer Twojego zamówienia to #{{code}}",
+    "Your address": "Twój adres",
+    "First name": "Imię",
+    "Last name": "Nazwisko",
+    "Street": "Ulica",
+    "Postal code": "Kod pocztowy",
+    "City": "Miasto",
+    "Payment": "Płatność",
+    "Add a new comment": "Dodaj nowy komentarz",
+    "Add a discount code": "Dodaj kod rabatowy",
+    "Add a code": "Dodaj kod",
+    "Total": "Suma",
+    "Your name": "Twoje imię",
+    "Comment": "Komentarz",
+    "Add a new one": "Dodaj nowy",
+    "Discount": "Rabat",
+    "Delivery address": "Adres dostawy"
 }
