@@ -6,7 +6,7 @@ import { NewCommentForm } from "../NewCommentForm";
 describe("<NewCommentForm />", () => {
   it("should make ability for user to add a new comment", () => {
     const onSubmitMock = jest.fn();
-    render(<NewCommentForm submit={onSubmitMock} />);
+    render(<NewCommentForm submit={onSubmitMock} onCancel={jest.fn()} />);
     const userName = "Piotr";
     const comment = "Te buty były super, polecam!";
 
