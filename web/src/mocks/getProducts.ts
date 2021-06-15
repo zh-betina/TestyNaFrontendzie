@@ -5,7 +5,10 @@ export const getProducts = (): Product[] => {
   return [
     {
       _id: "1",
-      name: "Buty sportowe",
+      name: {
+        pl: "Buty sportowe",
+        en: "Sports shoes",
+      },
       brand: "Adidas",
       price: [
         {
@@ -24,7 +27,10 @@ export const getProducts = (): Product[] => {
     },
     {
       _id: "2",
-      name: "Koszulka sportowa",
+      name: {
+        pl: "Koszulka sportowa",
+        en: "Sports T-shirt",
+      },
       brand: "Nike",
       price: [
         {
@@ -43,7 +49,10 @@ export const getProducts = (): Product[] => {
     },
     {
       _id: "3",
-      name: "Buty trekingowe",
+      name: {
+        pl: "Buty trekingowe",
+        en: "Trekking boots",
+      },
       brand: "HiTec",
       price: [
         {
@@ -62,7 +71,10 @@ export const getProducts = (): Product[] => {
     },
     {
       _id: "4",
-      name: "Spodnie dresowe",
+      name: {
+        pl: "Spodnie dresowe",
+        en: "Sweatpants",
+      },
       brand: "Reebok",
       price: [
         {
@@ -81,7 +93,10 @@ export const getProducts = (): Product[] => {
     },
     {
       _id: "5",
-      name: "Spodnie dresowe",
+      name: {
+        pl: "Spodnie dresowe",
+        en: "Sweatpants",
+      },
       brand: "Adidas",
       price: [
         {
@@ -100,7 +115,10 @@ export const getProducts = (): Product[] => {
     },
     {
       _id: "6",
-      name: "Spodnie dresowe",
+      name: {
+        pl: "Spodnie dresowe",
+        en: "Sweatpants",
+      },
       brand: "Nike",
       price: [
         {

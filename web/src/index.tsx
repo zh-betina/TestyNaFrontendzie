@@ -1,12 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import { I18nextProvider } from "react-i18next";
 import App from "./App";
-import { CurrencyChanger } from "./molecules/CurrencyChanger";
+import i18n from "./i18n";
+import { LanguageChanger } from "./molecules/LanguageChanger";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <I18nextProvider i18n={i18n}>
+      <LanguageChanger />
+      <App />
+    </I18nextProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

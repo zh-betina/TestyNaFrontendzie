@@ -6,7 +6,9 @@ import { PromotionBanner } from "./PromotionBanner";
 type PromotionBannerWrapperProps = {
   onClose: () => void;
 };
-const PromotionBannerWrapper = ({ onClose }: PromotionBannerWrapperProps) => {
+const PromotionBannerWrapper = ({
+  onClose,
+}: PromotionBannerWrapperProps): JSX.Element => {
   const currentDate = new Date();
   const promotions = getPromotions();
   const currentPromotion = getTheBestPromotionForDate(currentDate, promotions);

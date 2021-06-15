@@ -1,5 +1,6 @@
 import { useService } from "@xstate/react";
 import React, { ChangeEvent, useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import ErrorMessage from "../atoms/ErrorMessage";
 import { MachineContext } from "../MachineContext";
@@ -16,6 +17,7 @@ const Input = styled.input`
 const Button = styled.button``;
 
 const Discount = (): JSX.Element => {
+  const { t } = useTranslation();
   const machine = useContext(MachineContext);
   const [, send] = useService(machine);
   const [error, setError] = useState<string | null>(null);
@@ -43,11 +45,11 @@ const Discount = (): JSX.Element => {
   return (
     <DiscountSection>
       <Input
-        placeholder="Dodaj kod rabatowy"
+        placeholder={t("Add a discount code")}
         value={code}
         onChange={handleInputChange}
       />
-      <Button onClick={handleAddDiscount}>Dodaj kod</Button>
+      <Button onClick={handleAddDiscount}>{t("Add a code")}</Button>
       {error ? <ErrorMessage>{error}</ErrorMessage> : null}
     </DiscountSection>
   );

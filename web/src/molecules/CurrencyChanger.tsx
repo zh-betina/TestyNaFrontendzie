@@ -5,7 +5,7 @@ import { getAvailableCurrencies } from "../mocks/getAvailableCurrencies";
 import { CurrencyContextAction } from "../currencyContext/actions";
 import { Currency } from "../types/Currency";
 
-export const CurrencyChanger = () => {
+export const CurrencyChanger = (): JSX.Element => {
   const { selectedCurrency, dispatch } = useContext(CurrencyContext.Context);
   const availableCurrencies = getAvailableCurrencies();
 

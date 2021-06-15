@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 import { CartItem } from "../state";
 import { displayPrice } from "../utils/money";
 import { Cell, Name, Row } from "../atoms/Row";
@@ -30,9 +31,14 @@ const ListElement = ({
   onRemove,
   onAdd,
 }: ListElementProps): JSX.Element => {
+  const {
+    i18n: { language },
+  } = useTranslation();
   return (
     <Row>
-      <Name>{product.name}</Name>
+      <Name>
+        {product.name[language]} - {product.brand}
+      </Name>
       <Cell>{displayPrice(product.price)}</Cell>
       <Cell>
         <Button disabled={product.quantity < 1} onClick={onRemove}>

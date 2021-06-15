@@ -1,5 +1,6 @@
 import { useSelector, useService } from "@xstate/react";
 import React, { useContext } from "react";
+import { useTranslation } from "react-i18next";
 
 import styled from "styled-components";
 import ListHeader from "../atoms/ListHeader";
@@ -17,6 +18,10 @@ const DeliveryContainer = styled.section`
 
 const Delivery = (): JSX.Element => {
   const { selectedCurrency } = useContext(CurrencyContext.Context);
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const machine = useContext(MachineContext);
   const [current, send] = useService(machine);
   const shipment = current.context.shipmentMethod;
@@ -24,7 +29,7 @@ const Delivery = (): JSX.Element => {
 
   return (
     <DeliveryContainer>
-      <ListHeader>Dostawa</ListHeader>
+      <ListHeader>{t("Delivery")}</ListHeader>
       {shipmentMethods.map((method) => {
         const isNotFreeDelivery =
           getCurrentPrice(discountedSum, selectedCurrency) <
@@ -44,11 +49,11 @@ const Delivery = (): JSX.Element => {
                     send("CHOOSE_SHIPMENT", { methodType: method.type })
                   }
                 />
-                {method.name}
+                {method.name[language]}
               </label>
             </Name>
             <Cell>
-              {isNotFreeDelivery ? displayPrice(method.price) : "darmowa"}
+              {isNotFreeDelivery ? displayPrice(method.price) : t("free")}
             </Cell>
           </Row>
         );

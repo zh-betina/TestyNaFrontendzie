@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { AxiosResponse } from "axios";
+import React from "react";
 import { ProductElement } from "../molecules/ProductElement";
 import Loader from "../atoms/Loader";
 import { Product } from "../types/Product";
@@ -11,7 +10,7 @@ export const Products = (): JSX.Element => {
     endpoints.getProducts
   );
   const products = data?.data;
-  if ( loading || !data || !products) return <Loader />;
+  if (loading || !data || !products) return <Loader />;
 
   if (error) return <div>Error! ${error}</div>;
 

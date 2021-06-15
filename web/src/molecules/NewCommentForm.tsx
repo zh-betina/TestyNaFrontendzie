@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 
 type Props = {
   submit: (commentForm: CommentFormState) => void;
 };
-export const NewCommentForm = ({ submit }: Props) => {
+export const NewCommentForm = ({ submit }: Props): JSX.Element => {
+  const { t } = useTranslation();
   const [commentForm, setCommentForm] = useState<CommentFormState>({
     userName: "",
     comment: "",
@@ -23,32 +25,34 @@ export const NewCommentForm = ({ submit }: Props) => {
     setCommentForm({ ...commentForm, comment: event.currentTarget.value });
   };
 
+  const buttonText = t("Add a new one");
+
   return (
     <Form onSubmit={handleSubmit}>
       <FormInputs>
         <div>
           <label htmlFor="userName">
-            <span>Twoje imię:</span>
-          <input
-            id="userName"
-            type="text"
-            value={commentForm.userName}
-            onChange={nameChange}
-          />
+            <span>{t("Your name")}:</span>
+            <input
+              id="userName"
+              type="text"
+              value={commentForm.userName}
+              onChange={nameChange}
+            />
           </label>
         </div>
         <div>
           <label htmlFor="comment">
-            <span>Komentarz:</span>
-          <textarea
-            id="comment"
-            value={commentForm.comment}
-            onChange={commentChange}
-          />
+            <span>{t("Comment")}:</span>
+            <textarea
+              id="comment"
+              value={commentForm.comment}
+              onChange={commentChange}
+            />
           </label>
         </div>
       </FormInputs>
-      <input type="submit" value="Dodaj nowy" />
+      <input type="submit" value={buttonText} />
     </Form>
   );
 };

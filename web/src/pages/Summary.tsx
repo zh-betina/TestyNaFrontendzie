@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 import Loader from "../atoms/Loader";
 import Container from "../templates/Container";
 import tickIcon from "../assets/icons/tick.svg";
@@ -14,6 +15,7 @@ const SuccessMessage = styled.div`
 `;
 
 const Summary = (): JSX.Element => {
+  const { t } = useTranslation();
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
@@ -27,11 +29,17 @@ const Summary = (): JSX.Element => {
       <SuccessMessage>
         {success ? (
           <>
-            <img src={tickIcon} alt='tick-svg' height={50} />
-            <h2>Płatność zakończona pomyślnie.</h2>
+            <img src={tickIcon} alt="tick-svg" height={50} />
+            <h2>{t("Payment successfully completed.")}</h2>
             <h4>
-              Dziękujęmy za zakupy w naszym sklepie. Numer Twojego zamówienia to
-              #{Math.floor(Math.random() * (2349284 - 1049224) + 1049224)}
+              {t(
+                "Thank you for shopping at our store. Your order number is #{code}",
+                {
+                  code: Math.floor(
+                    Math.random() * (2349284 - 1049224) + 1049224
+                  ),
+                }
+              )}
             </h4>
           </>
         ) : (

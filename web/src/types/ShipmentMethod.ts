@@ -4,14 +4,17 @@ import { Currency } from "./Currency";
 export interface ShipmentMethod {
   type: string;
   price: Price[];
-  name: string;
+  name: { [key: string]: string };
   freeFrom: Price[];
 }
 
 export const shipmentMethods: ShipmentMethod[] = [
   {
     type: "expressDelivery",
-    name: "Dostawa ekspresowa (1-2 dni)",
+    name: {
+      pl: "Dostawa ekspresowa (1-2 dni)",
+      en: "Express delivery (1-2 days)",
+    },
     price: [
       {
         currency: Currency.PLN,
@@ -43,7 +46,10 @@ export const shipmentMethods: ShipmentMethod[] = [
   },
   {
     type: "standardDelivery",
-    name: "Dostawa standardowa (3-4 dni)",
+    name: {
+      pl: "Dostawa standardowa (3-4 dni)",
+      en: "Standard delivery (3-4 days)",
+    },
     price: [
       {
         currency: Currency.PLN,
