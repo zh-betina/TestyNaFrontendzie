@@ -26,6 +26,10 @@ export const Comments = ({ productId }: Props) => {
     setShowAddNewCommentBox(false);
   };
 
+  const onCancel = () => {
+    setShowAddNewCommentBox(false);
+  };
+
   return (
     <div>
       <CommentsContainer>
@@ -42,7 +46,7 @@ export const Comments = ({ productId }: Props) => {
         })}
       </CommentsContainer>
       {showAddNewCommentBox ? (
-        <NewCommentForm submit={onSubmit} />
+        <NewCommentForm submit={onSubmit} onCancel={onCancel} />
       ) : (
         <button type="button" onClick={() => setShowAddNewCommentBox(true)}>
           Dodaj nowy komentarz
