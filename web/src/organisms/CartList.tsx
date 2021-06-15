@@ -5,7 +5,7 @@ import { Cell, Name, Row } from "../atoms/Row";
 import ListElement from "../molecules/ListElement";
 import { displayPrice } from "../utils/money";
 
-import { getDiscounts, getSum } from "../state/selectors";
+import { getDiscountedSum } from "../state/selectors";
 import { MachineContext } from "../MachineContext";
 import { CartItem } from "../state";
 import DiscountRow from "../molecules/DiscountRow";
@@ -27,8 +27,7 @@ const Info = styled.section`
 const CartList = (): JSX.Element => {
   const machine = useContext(MachineContext);
   const [current, send] = useService(machine);
-  const sum = useSelector(machine, getSum);
-  const discountValue = useSelector(machine, getDiscounts);
+  const discounted = useSelector(machine, getDiscountedSum);
   const { cart } = current.context;
 
   if (cart.length === 0) {
@@ -51,7 +50,7 @@ const CartList = (): JSX.Element => {
       <DiscountRow />
       <Row>
         <Name>Do zapłaty:</Name>
-        <Cell>{displayPrice(sum - discountValue)}</Cell>
+        <Cell>{displayPrice(discounted)}</Cell>
       </Row>
     </>
   );
