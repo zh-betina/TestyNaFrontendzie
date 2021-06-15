@@ -3,12 +3,13 @@ import { Address } from "../types/Address";
 import { availableDiscounts, Discount } from "../types/Discount";
 import { shipmentMethods, ShipmentMethod } from "../types/ShipmentMethod";
 import { findProductById } from "../mocks/getProducts";
+import { Price } from "../types/Price";
 // import { API } from "../api/api";
 
 export interface CartItem {
   id: string;
   name: string;
-  price: number;
+  price: Price[];
   quantity: number;
 }
 

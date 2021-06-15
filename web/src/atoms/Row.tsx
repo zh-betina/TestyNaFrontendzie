@@ -12,7 +12,7 @@ export const Name = styled.div`
 `;
 
 export const Cell = styled.div`
-  flex-basis: 90px;
+  flex-basis: 120px;
   justify-content: center;
   align-items: center;
   display: flex;

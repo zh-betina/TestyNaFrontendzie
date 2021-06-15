@@ -38,7 +38,7 @@ const Payment = (): JSX.Element => {
               <Name>{product.name}</Name>
               <Cell>{product.quantity}</Cell>
               <Cell>{displayPrice(product.price)}</Cell>
-              <Cell>{displayPrice(product.price * product.quantity)}</Cell>
+              <Cell>{displayPrice(product.price, product.quantity)}</Cell>
             </Row>
           ))}
           <SumRow />

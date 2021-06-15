@@ -8,12 +8,15 @@ import { MachineContext } from "../MachineContext";
 import { getDiscountedSum } from "../state/selectors";
 import { shipmentMethods } from "../types/ShipmentMethod";
 import { displayPrice } from "../utils/money";
+import { getCurrentPrice } from "../utils/getCurrentPrice";
+import CurrencyContext from "../currencyContext/CurrencyContext";
 
 const DeliveryContainer = styled.section`
   margin-top: 20px;
 `;
 
 const Delivery = (): JSX.Element => {
+  const { selectedCurrency } = useContext(CurrencyContext.Context);
   const machine = useContext(MachineContext);
   const [current, send] = useService(machine);
   const shipment = current.context.shipmentMethod;
@@ -22,30 +25,34 @@ const Delivery = (): JSX.Element => {
   return (
     <DeliveryContainer>
       <ListHeader>Dostawa</ListHeader>
-      {shipmentMethods.map((method) => (
-        <Row key={method.type}>
-          <Name>
-            <label htmlFor={method.type}>
-              <input
-                type="radio"
-                name="shipment"
-                id={method.type}
-                value={method.type}
-                checked={shipment?.type === method.type}
-                onChange={() =>
-                  send("CHOOSE_SHIPMENT", { methodType: method.type })
-                }
-              />
-              {method.name}
-            </label>
-          </Name>
-          <Cell>
-            {discountedSum < (method.freeFrom ?? Infinity)
-              ? displayPrice(method.price)
-              : "darmowa"}
-          </Cell>
-        </Row>
-      ))}
+      {shipmentMethods.map((method) => {
+        const isNotFreeDelivery =
+          getCurrentPrice(discountedSum, selectedCurrency) <
+          ((method && getCurrentPrice(method.freeFrom, selectedCurrency)) ??
+            Infinity);
+        return (
+          <Row key={method.type}>
+            <Name>
+              <label htmlFor={method.type}>
+                <input
+                  type="radio"
+                  name="shipment"
+                  id={method.type}
+                  value={method.type}
+                  checked={shipment?.type === method.type}
+                  onChange={() =>
+                    send("CHOOSE_SHIPMENT", { methodType: method.type })
+                  }
+                />
+                {method.name}
+              </label>
+            </Name>
+            <Cell>
+              {isNotFreeDelivery ? displayPrice(method.price) : "darmowa"}
+            </Cell>
+          </Row>
+        );
+      })}
     </DeliveryContainer>
   );
 };

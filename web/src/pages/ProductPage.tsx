@@ -6,9 +6,10 @@ import { endpoints } from "../api/endpoints";
 import { Product } from "../types/Product";
 import Loader from "../atoms/Loader";
 import { Comments } from "../organisms/Comments";
-import { Name, Rest, Row } from "../atoms/Row";
+import { Name, Row } from "../atoms/Row";
 import NavigationButton from "../atoms/NavigationButton";
 import ListHeader from "../atoms/ListHeader";
+import { displayPrice } from "../utils/money";
 
 type ProductPageParams = {
   id: string;
@@ -28,7 +29,7 @@ export const ProductPage = (): JSX.Element => {
   return (
     <Container>
       <h1>
-        {data.name} - {data.price / 100}zł
+        {data.name} - {displayPrice(data.price)}
       </h1>
       <div>Marka: {data.brand}</div>
       <ListHeader />
