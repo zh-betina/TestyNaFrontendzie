@@ -39,15 +39,17 @@ const ListElement = ({
       <Name>
         {product.name[language]} - {product.brand}
       </Name>
-      <Cell>{displayPrice(product.price)}</Cell>
+      <Cell data-testid="product-price">{displayPrice(product.price)}</Cell>
       <Cell>
         <Button disabled={product.quantity < 1} onClick={onRemove}>
           -1
         </Button>
-        <span>{product.quantity}</span>
+        <span data-testid="product-quantity">{product.quantity}</span>
         <Button onClick={onAdd}>+1</Button>
       </Cell>
-      <Cell>{displayPrice(product.price, product.quantity)}</Cell>
+      <Cell data-testid="summary-price">
+        {displayPrice(product.price, product.quantity)}
+      </Cell>
     </Row>
   );
 };

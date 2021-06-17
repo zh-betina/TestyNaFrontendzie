@@ -6,7 +6,7 @@ export interface ReducerState {
 }
 
 export const startingState: ReducerState = {
-  selectedCurrency: Currency.PLN,
+  selectedCurrency: Currency.USD,
 };
 
 export type Action = {
