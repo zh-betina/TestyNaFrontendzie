@@ -32,7 +32,7 @@ export const NewCommentForm = ({ submit }: Props) => {
       <FormInputs>
         <div>
           <label htmlFor="userName">
-            <span>{t("Your name")}:</span>
+            <span>{t("labelYourName")}:</span>
             <input
               id="userName"
               type="text"
