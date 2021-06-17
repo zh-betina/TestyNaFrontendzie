@@ -13,12 +13,6 @@ import Container from "../templates/Container";
 
 const Cart = (): JSX.Element => {
   const { t } = useTranslation();
-  const machine = useContext(MachineContext);
-  const [, send] = useService(machine);
-
-  const handleNextNavigation = () => {
-    send("CART_COMPLETED");
-  };
 
   return (
     <Container>
@@ -34,7 +28,7 @@ const Cart = (): JSX.Element => {
           </NavigationButton>
         </Name>
         <Rest>
-          <NavigationButton to="/address" onClick={handleNextNavigation}>
+          <NavigationButton to="/address">
             {t("Address")} {">>"}
           </NavigationButton>
         </Rest>
