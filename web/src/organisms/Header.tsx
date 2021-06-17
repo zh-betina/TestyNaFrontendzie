@@ -1,18 +1,14 @@
 import * as React from "react";
-import { useContext } from "react";
-import { useService } from "@xstate/react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import ShoppingCartImage from "../assets/icons/shopping-cart.png";
-import { MachineContext } from "../MachineContext";
 import Image from "../atoms/Image";
+import { useAppSelector } from "../state/store";
 
 export const Header = (): JSX.Element => {
   const history = useHistory();
+  const cart = useAppSelector((state) => state.cart.items);
 
-  const machine = useContext(MachineContext);
-  const [current] = useService(machine);
-  const { cart } = current.context;
   return (
     <Container onClick={() => history.push("/cart")}>
       <CartImage src={ShoppingCartImage} />

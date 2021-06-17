@@ -25,10 +25,10 @@ export interface CheckoutState {
 }
 
 export type CheckoutEvents =
-  | { type: "INCREASE_QUANTITY"; productId: string }
-  | { type: "REDUCE_QUANTITY"; productId: string }
-  | { type: "ADD_PRODUCT"; productId: string }
-  | { type: "REMOVE_PRODUCT"; productId: string }
+  | { type: "INCREASE_QUANTITY"; productId: string } // done
+  | { type: "REDUCE_QUANTITY"; productId: string } // done
+  | { type: "ADD_PRODUCT"; productId: string } // done
+  | { type: "REMOVE_PRODUCT"; productId: string } // done
   | { type: "ADD_DISCOUNT"; code: string }
   | { type: "CHOOSE_SHIPMENT"; methodType: ShipmentMethod["type"] }
   | { type: "CART_COMPLETED" }
