@@ -33,4 +33,7 @@ export default {
     buildOptions: {
         /* ... */
     },
+    alias: {
+       "test-utils": "./src/testUtils/test-utils",
+    },
 };
