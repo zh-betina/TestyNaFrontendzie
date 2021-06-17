@@ -5,23 +5,18 @@ import { useMachine } from "@xstate/react";
 import { MachineContext } from "./MachineContext";
 import checkoutMachine from "./state";
 import { AppRoutes } from "./AppRoutes";
-import CurrencyContext from "./currencyContext/CurrencyContext";
+import {CurrencyProvider} from "./currencyContext/CurrencyContext";
 import { CurrencyChanger } from "./molecules/CurrencyChanger";
+
 
 function App(): JSX.Element {
   const [, , service] = useMachine(checkoutMachine);
-  const [currencyState, currencyDispatch] = useReducer(
-    CurrencyContext.reducer,
-    CurrencyContext.startingState
-  );
-
-  const currencyContext = { ...currencyState, dispatch: currencyDispatch };
   return (
     <MachineContext.Provider value={service}>
-      <CurrencyContext.Context.Provider value={currencyContext}>
+      <CurrencyProvider>
         <CurrencyChanger />
         <AppRoutes />
-      </CurrencyContext.Context.Provider>
+      </CurrencyProvider>
     </MachineContext.Provider>
   );
 }

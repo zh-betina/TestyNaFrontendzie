@@ -8,26 +8,22 @@ import removeFromCartImage from "../assets/icons/remove-from-cart.png";
 import { MachineContext } from "../MachineContext";
 import Image from "../atoms/Image";
 import { displayPrice } from "../utils/money";
+import { CartItem } from "../state";
 
 type ProductElementProps = {
   product: Product;
+  cart: CartItem[];
+  addToCart: (prodId: string) => void;
+  removeFromCart: (prodId: string) => void;
 };
 
 export const ProductElement = ({
   product,
+  cart,
+  addToCart,
+  removeFromCart,
 }: ProductElementProps): JSX.Element => {
   const history = useHistory();
-  const machine = useContext(MachineContext);
-  const [current, send] = useService(machine);
-  const { cart } = current.context;
-
-  const addToCart = () => {
-    send("ADD_PRODUCT", { productId: product._id });
-  };
-
-  const removeFromCart = () => {
-    send("REMOVE_PRODUCT", { productId: product._id });
-  };
 
   const inCart = cart.some((item) => item.id === product._id);
 
@@ -38,11 +34,11 @@ export const ProductElement = ({
       </NameContainer>
       <PriceContainer>{displayPrice(product.price)}</PriceContainer>
       {inCart ? (
-        <Button onClick={removeFromCart}>
+        <Button onClick={() => removeFromCart(product._id)}>
           <Image alt="removeFromCart" src={removeFromCartImage} />
         </Button>
       ) : (
-        <Button onClick={addToCart}>
+        <Button onClick={() => addToCart(product._id)}>
           <Image alt="addToCart" src={addToCartImage} />
         </Button>
       )}
