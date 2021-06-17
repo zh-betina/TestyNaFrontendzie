@@ -1,10 +1,14 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+// eslint-disable-next-line import/no-unresolved
+import { render, screen } from "test-utils";
 import user from "@testing-library/user-event";
 import { Currency } from "../../types/Currency";
 import ListElement from "../ListElement";
 
 describe("<ListElement/>", () => {
+  const PLNCurrencyState = {
+    value: { state: { selectedCurrency: Currency.PLN } },
+  };
   const getProduct = (price, quantity = 1) => ({
     id: "1",
     name: "Super produkt",
@@ -23,7 +27,8 @@ describe("<ListElement/>", () => {
   it("displays price of element", () => {
     const product = getProduct(getPriceObject(2000, 400, 500));
     render(
-      <ListElement product={product} onRemove={jest.fn()} onAdd={jest.fn()} />
+      <ListElement product={product} onRemove={jest.fn()} onAdd={jest.fn()} />,
+      PLNCurrencyState
     );
 
     const priceDiv = screen.getByTestId("product-price");
@@ -33,20 +38,22 @@ describe("<ListElement/>", () => {
   it("displays summary price for more than one element", () => {
     const product = getProduct(getPriceObject(5050, 1200, 1500), 3);
     render(
-      <ListElement product={product} onRemove={jest.fn()} onAdd={jest.fn()} />
+      <ListElement product={product} onRemove={jest.fn()} onAdd={jest.fn()} />,
+      PLNCurrencyState
     );
 
-    const summaryPriceDiv = screen.getbyTestId("summary-price");
+    const summaryPriceDiv = screen.getByTestId("summary-price");
     expect(summaryPriceDiv).toContainHTML("151.5 zł");
   });
 
   it("displays quantity of the product", () => {
     const product = getProduct(getPriceObject(5050, 1200, 1500), 3);
     render(
-      <ListElement product={product} onRemove={jest.fn()} onAdd={jest.fn()} />
+      <ListElement product={product} onRemove={jest.fn()} onAdd={jest.fn()} />,
+      PLNCurrencyState
     );
 
-    const summaryPriceDiv = screen.getbyTestId("product-quantity");
+    const summaryPriceDiv = screen.getByTestId("product-quantity");
     expect(summaryPriceDiv).toContainHTML("3");
   });
 

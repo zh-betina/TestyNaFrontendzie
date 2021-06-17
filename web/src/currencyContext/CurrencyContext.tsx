@@ -6,7 +6,7 @@ type CurrencyProviderProps = {
   value?: CurrencyContextInterface;
 };
 
-interface CurrencyContextInterface {
+export interface CurrencyContextInterface {
   dispatch?: Dispatch<Action>;
   state: ReducerState;
 }

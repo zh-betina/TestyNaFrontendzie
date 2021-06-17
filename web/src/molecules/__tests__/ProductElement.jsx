@@ -1,8 +1,8 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+// eslint-disable-next-line import/no-unresolved
+import { render, screen } from "test-utils";
 import { Currency } from "../../types/Currency";
 import { ProductElement } from "../ProductElement";
-import { CurrencyProvider } from "../../currencyContext/CurrencyContext";
 
 const renderProductElement = (contextValue) => {
   const product = {
@@ -18,14 +18,13 @@ const renderProductElement = (contextValue) => {
 
   const value = { state: { selectedCurrency: contextValue } };
   return render(
-    <CurrencyProvider value={value}>
-      <ProductElement
-        product={product}
-        addToCart={jest.fn()}
-        removeFromCart={jest.fn()}
-        cart={[]}
-      />
-    </CurrencyProvider>
+    <ProductElement
+      product={product}
+      addToCart={jest.fn()}
+      removeFromCart={jest.fn()}
+      cart={[]}
+    />,
+    { value }
   );
 };
 
@@ -43,8 +42,3 @@ describe("<ProductElement />", () => {
     }
   );
 });
-
-/*
-
-
- */

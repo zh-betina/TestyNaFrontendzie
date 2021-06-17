@@ -1,18 +1,13 @@
 import React from "react";
-import { screen, render } from "@testing-library/react";
 import user from "@testing-library/user-event";
-import { I18nextProvider } from "react-i18next";
+// eslint-disable-next-line import/no-unresolved
+import { render, screen } from "test-utils";
 import { NewCommentForm } from "../NewCommentForm";
-import i18n from "../../i18nForTests";
 
 describe("<NewCommentForm />", () => {
   it("should make ability for user to add a new comment", () => {
     const onSubmitMock = jest.fn();
-    render(
-      <I18nextProvider i18n={i18n}>
-        <NewCommentForm submit={onSubmitMock} />
-      </I18nextProvider>
-    );
+    render(<NewCommentForm submit={onSubmitMock} />);
     const userName = "Piotr";
     const comment = "Te buty były super, polecam!";
 
