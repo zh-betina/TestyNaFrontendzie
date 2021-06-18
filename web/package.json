@@ -8,8 +8,8 @@
     "build": "snowpack build",
     "clean": "rm -rf .parcel-cache",
     "test": "jest",
-    "lint": "eslint ..",
-    "lint:fix": "eslint --fix ..",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "e2e": "cypress open"
   },
   "dependencies": {

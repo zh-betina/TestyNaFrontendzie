@@ -1,31 +1,29 @@
-import React, { useContext } from "react";
-import { useService } from "@xstate/react";
+import React from "react";
+
+import { useAppDispatch, useAppSelector } from "state/store";
+import { addProduct, removeProduct } from "state/cart";
+
 import { ProductElement } from "../molecules/ProductElement";
 import Loader from "../atoms/Loader";
 import { Product } from "../types/Product";
 import { endpoints } from "../api/endpoints";
 import { useAxiosGet } from "../hooks/useAxiosGet";
-import { MachineContext } from "../MachineContext";
 
 export const Products = (): JSX.Element => {
   const [data, loading, error] = useAxiosGet<{ data: Product[] }>(
     endpoints.getProducts
   );
   const products = data?.data;
-  const machine = useContext(MachineContext);
-  const [current, send] = useService(machine);
-  const { cart } = current.context;
+  const cart = useAppSelector((state) => state.cart.items);
+  const dispatch = useAppDispatch();
   if (loading || !data || !products) return <Loader />;
 
   if (error) return <div>Error! ${error}</div>;
 
-  const addToCart = (productId: string) => {
-    send("ADD_PRODUCT", { productId });
-  };
+  const addToCart = (productId: string) => dispatch(addProduct({ productId }));
 
-  const removeFromCart = (productId: string) => {
-    send("REMOVE_PRODUCT", { productId });
-  };
+  const removeFromCart = (productId: string) =>
+    dispatch(removeProduct({ productId }));
 
   return (
     <div>

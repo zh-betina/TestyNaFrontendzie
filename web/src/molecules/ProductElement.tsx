@@ -7,7 +7,7 @@ import addToCartImage from "../assets/icons/add-to-cart.png";
 import removeFromCartImage from "../assets/icons/remove-from-cart.png";
 import Image from "../atoms/Image";
 import { displayPrice } from "../utils/money";
-import { CartItem } from "../state";
+import { CartItem } from "../state/cart";
 
 type ProductElementProps = {
   product: Product;
