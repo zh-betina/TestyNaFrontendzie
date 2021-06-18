@@ -1,7 +1,5 @@
-import { useService } from "@xstate/react";
-import React, { useContext } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { MachineContext } from "../MachineContext";
 import ListHeader from "../atoms/ListHeader";
 import NavigationButton from "../atoms/NavigationButton";
 import { Rest, Name, Row } from "../atoms/Row";

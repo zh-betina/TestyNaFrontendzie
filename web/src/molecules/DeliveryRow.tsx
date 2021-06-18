@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Cell, Name, Row } from "../atoms/Row";
-import { MachineContext } from "../MachineContext";
 import { getDelivery, getDiscountedSum } from "../state/selectors";
 import { displayPrice } from "../utils/money";
 import CurrencyContext from "../currencyContext/CurrencyContext";

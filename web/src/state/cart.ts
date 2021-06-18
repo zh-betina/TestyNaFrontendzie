@@ -3,7 +3,7 @@ import { findProductById } from "../mocks/getProducts";
 import { availableDiscounts, Discount } from "../types/Discount";
 import { Price } from "../types/Price";
 
-interface CartItem {
+export interface CartItem {
   id: string;
   name: { [key: string]: string };
   brand: string;
