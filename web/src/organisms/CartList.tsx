@@ -6,7 +6,7 @@ import ListElement from "../molecules/ListElement";
 import { displayPrice } from "../utils/money";
 
 import { getDiscountedSum } from "../state/selectors";
-import { CartItem } from "../state";
+import { CartItem } from "../state/cart";
 import DiscountRow from "../molecules/DiscountRow";
 import SumRow from "../molecules/SumRow";
 import { useAppDispatch, useAppSelector } from "../state/store";

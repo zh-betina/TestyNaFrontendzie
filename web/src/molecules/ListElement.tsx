@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import { CartItem } from "../state";
+import { CartItem } from "../state/cart";
 import { displayPrice } from "../utils/money";
 import { Cell, Name, Row } from "../atoms/Row";
 
