@@ -1,5 +1,4 @@
-import { useSelector, useService } from "@xstate/react";
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { Cell, Name, Row } from "../atoms/Row";
@@ -7,10 +6,11 @@ import ListElement from "../molecules/ListElement";
 import { displayPrice } from "../utils/money";
 
 import { getDiscountedSum } from "../state/selectors";
-import { MachineContext } from "../MachineContext";
 import { CartItem } from "../state";
 import DiscountRow from "../molecules/DiscountRow";
 import SumRow from "../molecules/SumRow";
+import { useAppDispatch, useAppSelector } from "../state/store";
+import { addProduct, removeProduct } from "../state/cart";
 
 const List = styled.section`
   padding-bottom: 10px;
@@ -27,10 +27,9 @@ const Info = styled.section`
 
 const CartList = (): JSX.Element => {
   const { t } = useTranslation();
-  const machine = useContext(MachineContext);
-  const [current, send] = useService(machine);
-  const discounted = useSelector(machine, getDiscountedSum);
-  const { cart } = current.context;
+  const dispatch = useAppDispatch();
+  const discounted = useAppSelector(getDiscountedSum);
+  const cart = useAppSelector((state) => state.cart.items);
 
   if (cart.length === 0) {
     return <Info>{t("Your cart is empty")}</Info>;
@@ -43,8 +42,8 @@ const CartList = (): JSX.Element => {
           <ListElement
             key={elem.id}
             product={elem}
-            onRemove={() => send("REDUCE_QUANTITY", { productId: elem.id })}
-            onAdd={() => send("INCREASE_QUANTITY", { productId: elem.id })}
+            onRemove={() => dispatch(removeProduct({ productId: elem.id }))}
+            onAdd={() => dispatch(addProduct({ productId: elem.id }))}
           />
         ))}
       </List>

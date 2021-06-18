@@ -1,5 +1,4 @@
-import { useService } from "@xstate/react";
-import React, { useContext } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 
 import styled from "styled-components";
@@ -7,12 +6,12 @@ import ListHeader from "../atoms/ListHeader";
 import NavigationButton from "../atoms/NavigationButton";
 import { Cell, Name, Rest, Row } from "../atoms/Row";
 import { Subtitle } from "../atoms/Subtitle";
-import { MachineContext } from "../MachineContext";
 import AddressDisplay from "../molecules/AddressDisplay";
 import DeliveryRow from "../molecules/DeliveryRow";
 import DiscountRow from "../molecules/DiscountRow";
 import SumRow from "../molecules/SumRow";
 import TotalRow from "../molecules/TotalRow";
+import { useAppSelector } from "../state/store";
 import Container from "../templates/Container";
 import { displayPrice } from "../utils/money";
 
@@ -28,9 +27,8 @@ const Payment = (): JSX.Element => {
     t,
     i18n: { language },
   } = useTranslation();
-  const machine = useContext(MachineContext);
-  const [current, send] = useService(machine);
-  const { cart, address } = current.context;
+  const cart = useAppSelector((state) => state.cart.items);
+  const address = useAppSelector((state) => state.delivery.address);
 
   return (
     <Container>
@@ -57,7 +55,7 @@ const Payment = (): JSX.Element => {
       </Row>
       <Row>
         <Rest>
-          <NavigationButton to="/summary" onClick={() => send("SUCCESS")}>
+          <NavigationButton to="/summary">
             {t("Pay with a card")} **0349
           </NavigationButton>
         </Rest>

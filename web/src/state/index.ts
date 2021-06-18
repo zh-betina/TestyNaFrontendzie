@@ -29,10 +29,10 @@ export type CheckoutEvents =
   | { type: "REDUCE_QUANTITY"; productId: string } // done
   | { type: "ADD_PRODUCT"; productId: string } // done
   | { type: "REMOVE_PRODUCT"; productId: string } // done
-  | { type: "ADD_DISCOUNT"; code: string }
-  | { type: "CHOOSE_SHIPMENT"; methodType: ShipmentMethod["type"] }
+  | { type: "ADD_DISCOUNT"; code: string } //done
+  | { type: "CHOOSE_SHIPMENT"; methodType: ShipmentMethod["type"] } //done
   | { type: "CART_COMPLETED" }
-  | { type: "ADDRESS_COMPLETED"; address: Address }
+  | { type: "ADDRESS_COMPLETED"; address: Address } //done
   | { type: "SUCCESS" }
   | { type: "PREV" };
 

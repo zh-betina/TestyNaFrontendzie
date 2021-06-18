@@ -1,12 +1,12 @@
-import checkoutMachine from "./index";
 import { ShipmentMethod } from "../types/ShipmentMethod";
 import { Price } from "../types/Price";
 import { getAvailableCurrencies } from "../mocks/getAvailableCurrencies";
+import { RootState } from "./store";
 
-export const getSum = (state: typeof checkoutMachine): Price[] => {
+export const getSum = (state: RootState): Price[] => {
   const availableCurrencies = getAvailableCurrencies();
   const elements = Array.from(
-    state.context.cart.map((elem) => {
+    state.cart.items.map((elem) => {
       return elem.price.map((elemPrice) => ({
         ...elemPrice,
         price: elemPrice.price * elem.quantity,
@@ -31,12 +31,11 @@ export const getSum = (state: typeof checkoutMachine): Price[] => {
   return sumPrices;
 };
 
-export const getDelivery = (
-  state: typeof checkoutMachine
-): ShipmentMethod | null => state.context.shipmentMethod;
+export const getDelivery = (state: RootState): ShipmentMethod | null =>
+  state.delivery.shipmentMethod;
 
-export const getDiscounts = (state: typeof checkoutMachine): Price[] => {
-  const discount = state.context.appliedDiscount?.percentage ?? 0;
+export const getDiscounts = (state: RootState): Price[] => {
+  const discount = state.cart.appliedDiscount?.percentage ?? 0;
   const productsTotal = getSum(state);
   return productsTotal.map((prod) => ({
     ...prod,
@@ -44,7 +43,7 @@ export const getDiscounts = (state: typeof checkoutMachine): Price[] => {
   }));
 };
 
-export const getDiscountedSum = (state: typeof checkoutMachine): Price[] => {
+export const getDiscountedSum = (state: RootState): Price[] => {
   const productsTotal = getSum(state);
   const discounts = getDiscounts(state);
   return productsTotal.map((prod) => ({
@@ -55,9 +54,9 @@ export const getDiscountedSum = (state: typeof checkoutMachine): Price[] => {
   }));
 };
 
-export const getTotal = (state: typeof checkoutMachine): Price[] => {
+export const getTotal = (state: RootState): Price[] => {
   const discountedSum = getDiscountedSum(state);
-  const shippingMethod = state.context.shipmentMethod;
+  const shippingMethod = state.delivery.shipmentMethod;
   return discountedSum.map((disSum) => {
     const currShippingMethod =
       shippingMethod &&
