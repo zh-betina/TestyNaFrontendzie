@@ -6,7 +6,7 @@ import { useAxiosGet } from "../hooks/useAxiosGet";
 import { endpoints } from "../api/endpoints";
 import { Product } from "../types/Product";
 import Loader from "../atoms/Loader";
-import { Comments } from "../organisms/Comments";
+import { CommentsWrapper } from "../organisms/Comments";
 import { Name, Row } from "../atoms/Row";
 import NavigationButton from "../atoms/NavigationButton";
 import ListHeader from "../atoms/ListHeader";
@@ -40,7 +40,7 @@ export const ProductPage = (): JSX.Element => {
         {t("Brand")}: {data.brand}
       </div>
       <ListHeader />
-      <Comments productId={data._id} />
+      <CommentsWrapper productId={data._id} />
       <ListHeader />
       <Row>
         <Name>
