@@ -9,14 +9,14 @@ import { getDiscountedSum } from "../state/selectors";
 import { shipmentMethods } from "../types/ShipmentMethod";
 import { displayPrice } from "../utils/money";
 import { getCurrentPrice } from "../utils/getCurrentPrice";
-import CurrencyContext from "../currencyContext/CurrencyContext";
+import {useCurrency} from "../currencyContext/CurrencyContext";
 
 const DeliveryContainer = styled.section`
   margin-top: 20px;
 `;
 
 const Delivery = (): JSX.Element => {
-  const { selectedCurrency } = useContext(CurrencyContext.Context);
+  const { state: {selectedCurrency} } = useCurrency();
   const machine = useContext(MachineContext);
   const [current, send] = useService(machine);
   const shipment = current.context.shipmentMethod;

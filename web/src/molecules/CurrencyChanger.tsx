@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import CurrencyContext from "../currencyContext/CurrencyContext";
 import { getAvailableCurrencies } from "../mocks/getAvailableCurrencies";
 import { CurrencyContextAction } from "../currencyContext/actions";
 import { Currency } from "../types/Currency";
+import {useCurrency} from "../currencyContext/CurrencyContext";
 
 export const CurrencyChanger = () => {
-  const { selectedCurrency, dispatch } = useContext(CurrencyContext.Context);
+  const { state: {selectedCurrency}, dispatch } = useCurrency();
   const availableCurrencies = getAvailableCurrencies();
 
   const options = availableCurrencies.map((currency) => ({
