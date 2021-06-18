@@ -1,14 +1,14 @@
-import { useService } from "@xstate/react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import React, { useContext } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { Product } from "../types/Product";
 import addToCartImage from "../assets/icons/add-to-cart.png";
 import removeFromCartImage from "../assets/icons/remove-from-cart.png";
-import { MachineContext } from "../MachineContext";
 import Image from "../atoms/Image";
 import { displayPrice } from "../utils/money";
+import { useAppDispatch, useAppSelector } from "../state/store";
+import { addProduct, removeProduct } from "../state/cart";
 
 type ProductElementProps = {
   product: Product;
@@ -19,16 +19,15 @@ export const ProductElement = ({
 }: ProductElementProps): JSX.Element => {
   const { i18n } = useTranslation();
   const history = useHistory();
-  const machine = useContext(MachineContext);
-  const [current, send] = useService(machine);
-  const { cart } = current.context;
+  const dispatch = useAppDispatch();
+  const cart = useAppSelector((state) => state.cart.items);
 
   const addToCart = () => {
-    send("ADD_PRODUCT", { productId: product._id });
+    dispatch(addProduct({ productId: product._id }));
   };
 
   const removeFromCart = () => {
-    send("REMOVE_PRODUCT", { productId: product._id });
+    dispatch(removeProduct({ productId: product._id }));
   };
 
   const inCart = cart.some((item) => item.id === product._id);

@@ -1,20 +1,17 @@
-import { useSelector } from "@xstate/react";
-import React, { useContext } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { Cell, Name, Row } from "../atoms/Row";
 import { MachineContext } from "../MachineContext";
 import { getDiscounts } from "../state/selectors";
+import { useAppSelector } from "../state/store";
 import { displayPrice } from "../utils/money";
 
 const DiscountRow = (): JSX.Element => {
   const { t } = useTranslation();
-  const machine = useContext(MachineContext);
-  const discountValue = useSelector(machine, getDiscounts);
-  const discount = useSelector(
-    machine,
-    (state) => state.context.appliedDiscount
-  );
+  const discountValue = useAppSelector(getDiscounts);
+  const discount = useAppSelector((state) => state.cart.appliedDiscount);
+  const amount = displayPrice(discountValue);
   return (
     <>
       {discount ? (
@@ -22,7 +19,7 @@ const DiscountRow = (): JSX.Element => {
           <Name>
             {t("Discount")}: {discount?.code} (-{discount?.percentage}%)
           </Name>
-          <Cell>-{displayPrice(discountValue)}</Cell>
+          <Cell>-{amount}</Cell>
         </Row>
       ) : null}
     </>

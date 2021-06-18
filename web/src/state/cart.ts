@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { findProductById } from "../mocks/getProducts";
-import { Discount } from "../types/Discount";
+import { availableDiscounts, Discount } from "../types/Discount";
 import { Price } from "../types/Price";
 
 interface CartItem {
@@ -69,10 +69,17 @@ const cartSlice = createSlice({
         .filter((product) => product.quantity !== 0);
       return { ...state, items };
     },
+    addDiscount: (state, action: PayloadAction<{ code: string }>) => {
+      const appliedDiscount =
+        availableDiscounts.find(
+          (discount) => discount.code === action.payload.code
+        ) ?? null;
+      return { ...state, appliedDiscount };
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addProduct, removeProduct } = cartSlice.actions;
+export const { addProduct, removeProduct, addDiscount } = cartSlice.actions;
 
 export default cartSlice.reducer;

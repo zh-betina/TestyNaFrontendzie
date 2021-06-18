@@ -1,10 +1,10 @@
-import { useService } from "@xstate/react";
-import React, { ChangeEvent, useContext, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import ErrorMessage from "../atoms/ErrorMessage";
-import { MachineContext } from "../MachineContext";
 import { availableDiscounts } from "../types/Discount";
+import { addDiscount } from "../state/cart";
 
 const DiscountSection = styled.div`
   margin-top: 30px;
@@ -18,10 +18,8 @@ const Button = styled.button``;
 
 const Discount = (): JSX.Element => {
   const { t } = useTranslation();
-  const machine = useContext(MachineContext);
-  const [, send] = useService(machine);
+  const dispatch = useDispatch();
   const [error, setError] = useState<string | null>(null);
-
   const [code, setCode] = useState("");
 
   const handleAddDiscount = () => {
@@ -32,9 +30,10 @@ const Discount = (): JSX.Element => {
         .map((discount) => discount.code)
         .includes(formattedCode)
     ) {
+      console.log(formattedCode, availableDiscounts);
       setError("Kod rabatowy jest nieprawidłowy");
     }
-    send("ADD_DISCOUNT", { code: formattedCode });
+    dispatch(addDiscount({ code: formattedCode }));
   };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {

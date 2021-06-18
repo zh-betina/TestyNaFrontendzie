@@ -1,4 +1,3 @@
-import { useSelector } from "@xstate/react";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -8,6 +7,7 @@ import { getDelivery, getDiscountedSum } from "../state/selectors";
 import { displayPrice } from "../utils/money";
 import CurrencyContext from "../currencyContext/CurrencyContext";
 import { getCurrentPrice } from "../utils/getCurrentPrice";
+import { useAppSelector } from "../state/store";
 
 const DeliveryRow = (): JSX.Element => {
   const { selectedCurrency } = useContext(CurrencyContext.Context);
@@ -15,9 +15,8 @@ const DeliveryRow = (): JSX.Element => {
     t,
     i18n: { language },
   } = useTranslation();
-  const machine = useContext(MachineContext);
-  const delivery = useSelector(machine, getDelivery);
-  const discountedSum = useSelector(machine, getDiscountedSum);
+  const delivery = useAppSelector(getDelivery);
+  const discountedSum = useAppSelector(getDiscountedSum);
   const isNotFreeDelivery =
     getCurrentPrice(discountedSum, selectedCurrency) <
     ((delivery && getCurrentPrice(delivery.freeFrom, selectedCurrency)) ??
