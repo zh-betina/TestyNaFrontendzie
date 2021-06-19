@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import ListHeader from "../atoms/ListHeader";
 import NavigationButton from "../atoms/NavigationButton";
 import { Rest, Name, Row } from "../atoms/Row";
-import CartList from "../organisms/CartList";
+import CartList from "../organisms/CartList/CartList";
 import Delivery from "../organisms/Delivery";
 import Discount from "../organisms/Discount";
 import TotalRow from "../molecules/TotalRow";

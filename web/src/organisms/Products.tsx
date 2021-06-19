@@ -1,7 +1,7 @@
 import React from "react";
 
-import { useAppDispatch, useAppSelector } from "state/store";
-import { addProduct, removeProduct } from "state/cart";
+import { useAppDispatch, useAppSelector } from "../state/store";
+import { addProduct, removeProduct } from "../state/cart";
 
 import { ProductElement } from "../molecules/ProductElement";
 import Loader from "../atoms/Loader";

@@ -3,12 +3,15 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import cartReducer from "./cart";
 import deliveryReducer from "./delivery";
 
+export const reducer = {
+  cart: cartReducer,
+  delivery: deliveryReducer,
+};
+
 const store = configureStore({
-  reducer: {
-    cart: cartReducer,
-    delivery: deliveryReducer,
-  },
+  reducer,
 });
+
 export default store;
 
 export type RootState = ReturnType<typeof store.getState>;
