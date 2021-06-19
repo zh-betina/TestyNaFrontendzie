@@ -34,4 +34,47 @@ describe("<CartList/>", () => {
     ).toBeInTheDocument();
     expect(screen.getByTestId("summary-price")).toHaveTextContent("150 $");
   });
+
+  it("allows to increase quantity of a product in the cart", () => {
+    const store = getTestStore({
+      cart: { items: [product], appliedDiscount: null },
+    });
+    render(<CartList />, { store });
+
+    const addMoreButton = screen.getByText("+1");
+    expect(addMoreButton).toBeInTheDocument();
+
+    userEvent.click(addMoreButton);
+    expect(screen.getByTestId("product-quantity")).toHaveTextContent("2");
+    expect(screen.getByTestId("toPay")).toHaveTextContent("300 $");
+  });
+
+  it("allows to decrease quantity of a product in the cart", () => {
+    const store = getTestStore({
+      cart: { items: [product], appliedDiscount: null },
+    });
+    render(<CartList />, { store });
+
+    const removeOneButton = screen.getByText("-1");
+    expect(removeOneButton).toBeInTheDocument();
+
+    userEvent.click(removeOneButton);
+
+    expect(screen.getByText("Your cart is empty"));
+    expect(store.getState().cart.items).toHaveLength(0);
+  });
+
+  it("recalculates total after discount", () => {
+    const store = getTestStore({
+      cart: { items: [product], appliedDiscount: null },
+    });
+    render(<CartList />, { store });
+
+    expect(screen.queryByText(/Discount/)).not.toBeInTheDocument();
+
+    store.dispatch(addDiscount({ code: "DLA_NAJLEPSZYCH" }));
+
+    expect(screen.getByText(/Discount/)).toBeInTheDocument();
+    expect(screen.getByTestId("toPay")).toHaveTextContent("130.5 $");
+  });
 });
