@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { CommentFormState, NewCommentForm } from "../molecules/NewCommentForm";
-import { API } from "../api/api";
+import { getComments } from "../api/api";
 import { Comment } from "../types/Comment";
 import Loader from "../atoms/Loader";
 
@@ -10,16 +10,31 @@ type CommentsWrapperProps = {
   productId: string;
 };
 const CommentsWrapper = ({ productId }: CommentsWrapperProps): JSX.Element => {
+  const { t } = useTranslation();
   const [comments, setComments] = useState<Comment[] | null>(null);
+  const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
     const fetch = async () => {
-      const data = await API.getComments(productId);
-      setComments(data as Comment[]);
+      try {
+        const data = await getComments(productId);
+        setComments(data as Comment[]);
+      } catch (e) {
+        setError(true);
+      }
     };
 
     fetch();
   }, []);
+
+  if (error)
+    return (
+      <div>
+        {t(
+          "Something wrong happened with comments feature. Please try again later."
+        )}
+      </div>
+    );
 
   if (!comments) {
     return <Loader />;
@@ -52,17 +67,21 @@ const Comments = ({ comments }: CommentsProps): JSX.Element => {
   return (
     <div>
       <CommentsContainer>
-        {comments.map((comment) => {
-          return (
-            <div key={comment.id}>
-              <CommentHeader>
-                <OwnerName>{comment.owner}</OwnerName>
-                <CommentDate>{comment.date}</CommentDate>
-              </CommentHeader>
-              <CommentBox>{comment.comment}</CommentBox>
-            </div>
-          );
-        })}
+        {comments.length === 0 ? (
+          <div>{t("No comments yet")}</div>
+        ) : (
+          comments.map((comment) => {
+            return (
+              <div key={comment.id}>
+                <CommentHeader>
+                  <OwnerName>{comment.owner}</OwnerName>
+                  <CommentDate>{comment.date}</CommentDate>
+                </CommentHeader>
+                <CommentBox>{comment.comment}</CommentBox>
+              </div>
+            );
+          })
+        )}
       </CommentsContainer>
       {showAddNewCommentBox ? (
         <NewCommentForm submit={onSubmit} />

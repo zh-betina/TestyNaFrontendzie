@@ -1,6 +1,7 @@
 module.exports = {
     setupFilesAfterEnv: [
-        '@testing-library/jest-dom/extend-expect'
+        '@testing-library/jest-dom/extend-expect',
+        "./src/setupTests.ts"
     ],
     testEnvironment: 'jsdom',
     "roots": [
