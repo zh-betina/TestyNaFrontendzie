@@ -17,6 +17,10 @@ export const getPromotionDuration = (
 
   const daysDifference = (endDateTime - startDateTime) / dayInMilliSeconds;
 
+  if (daysDifference <= 0) {
+    return { type: PromotionDurationType.finished, value: 0 };
+  }
+
   if (daysDifference > 30) return getDurationInMonths(daysDifference);
   if (daysDifference > 10) return getDurationInWeeks(daysDifference);
   if (daysDifference > 2)

@@ -6,6 +6,7 @@ export enum PromotionDurationType {
   days = "days",
   weeks = "weeks",
   months = "months",
+  finished = "finished",
 }
 
 export type PromotionDurationOutput = {
