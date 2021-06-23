@@ -14,6 +14,7 @@ export const Products = (): JSX.Element => {
   const products = data?.data;
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state) => state.cart.items);
+
   if (loading || !data || !products) return <Loader />;
 
   if (error) return <div>Error! ${error}</div>;
@@ -26,6 +27,7 @@ export const Products = (): JSX.Element => {
     dispatch(removeProduct({ productId }));
   };
 
+  console.log("HERE: ", products);
   return (
     <div>
       {products.map((prod: Product) => {
