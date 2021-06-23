@@ -22,7 +22,7 @@
     "Add a discount code": "Dodaj kod rabatowy",
     "Add a code": "Dodaj kod",
     "Total": "Suma",
-    "Your name": "Twoje imię",
+    "labelYourName": "Twoje imię",
     "Comment": "Komentarz",
     "Add a new one": "Dodaj nowy",
     "Discount": "Rabat",
@@ -34,5 +34,8 @@
     "about {value} weeks": "około {{value}} tygodni",
     "about {value} hours": "około {{value}} godzin",
     "about {value} months": "około {{value}} miesięcy",
-    "free": "darmowa"
+    "free": "darmowa",
+    "No comments yet": "Nie ma jeszcze żadnych komentarzy",
+    "Something wrong happened with comments feature. Please try again later.": "Moduł komentarzy nie działa. Proszę spróbuj ponownie później."
+
 }

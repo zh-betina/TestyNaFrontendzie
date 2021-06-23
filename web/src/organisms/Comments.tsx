@@ -1,47 +1,87 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { format } from "date-fns";
 import { useTranslation } from "react-i18next";
 import { CommentFormState, NewCommentForm } from "../molecules/NewCommentForm";
-import { getCommentsForProduct } from "../mocks/getComments";
+import { getComments } from "../api/api";
+import { Comment } from "../types/Comment";
+import Loader from "../atoms/Loader";
 
-type Props = {
+type CommentsWrapperProps = {
   productId: string;
 };
-export const Comments = ({ productId }: Props): JSX.Element => {
+const CommentsWrapper = ({ productId }: CommentsWrapperProps): JSX.Element => {
+  const { t } = useTranslation();
+  const [comments, setComments] = useState<Comment[] | null>(null);
+  const [error, setError] = useState<boolean>(false);
+
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        const data = await getComments(productId);
+        setComments(data as Comment[]);
+      } catch (e) {
+        setError(true);
+      }
+    };
+
+    fetch();
+  }, []);
+
+  if (error)
+    return (
+      <div>
+        {t(
+          "Something wrong happened with comments feature. Please try again later."
+        )}
+      </div>
+    );
+
+  if (!comments) {
+    return <Loader />;
+  }
+
+  return <Comments comments={comments} />;
+};
+type CommentsProps = {
+  comments: Comment[];
+};
+const Comments = ({ comments }: CommentsProps): JSX.Element => {
   const { t } = useTranslation();
   const [showAddNewCommentBox, setShowAddNewCommentBox] =
     useState<boolean>(false);
-  const [comments, setComments] = useState(getCommentsForProduct(productId));
 
   const onSubmit = (commentForm: CommentFormState) => {
-    setComments([
-      ...comments,
-      {
-        id: `${comments.length + 1}`,
-        productId,
-        comment: commentForm.comment,
-        owner: commentForm.userName,
-        date: format(new Date(), "yyyy-MM-dd HH:mm"),
-      },
-    ]);
+    // setComments([
+    //   ...comments,
+    //   {
+    //     id: `${comments.length + 1}`,
+    //     productId,
+    //     comment: commentForm.comment,
+    //     owner: commentForm.userName,
+    //     date: format(new Date(), "yyyy-MM-dd HH:mm"),
+    //   },
+    // ]);
     setShowAddNewCommentBox(false);
   };
 
   return (
     <div>
       <CommentsContainer>
-        {comments.map((comment) => {
-          return (
-            <div key={comment.id}>
-              <CommentHeader>
-                <OwnerName>{comment.owner}</OwnerName>
-                <CommentDate>{comment.date}</CommentDate>
-              </CommentHeader>
-              <CommentBox>{comment.comment}</CommentBox>
-            </div>
-          );
-        })}
+        {comments.length === 0 ? (
+          <div>{t("No comments yet")}</div>
+        ) : (
+          comments.map((comment) => {
+            return (
+              <div key={comment.id}>
+                <CommentHeader>
+                  <OwnerName>{comment.owner}</OwnerName>
+                  <CommentDate>{comment.date}</CommentDate>
+                </CommentHeader>
+                <CommentBox>{comment.comment}</CommentBox>
+              </div>
+            );
+          })
+        )}
       </CommentsContainer>
       {showAddNewCommentBox ? (
         <NewCommentForm submit={onSubmit} />
@@ -86,3 +126,5 @@ const CommentDate = styled.div`
   font-size: 0.8em;
   color: #000000;
 `;
+
+export { CommentsWrapper };

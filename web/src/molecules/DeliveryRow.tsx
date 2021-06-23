@@ -1,15 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { Cell, Name, Row } from "../atoms/Row";
 import { getDelivery, getDiscountedSum } from "../state/selectors";
 import { displayPrice } from "../utils/money";
-import CurrencyContext from "../currencyContext/CurrencyContext";
 import { getCurrentPrice } from "../utils/getCurrentPrice";
 import { useAppSelector } from "../state/store";
+import { useCurrency } from "../currencyContext/CurrencyContext";
 
 const DeliveryRow = (): JSX.Element => {
-  const { selectedCurrency } = useContext(CurrencyContext.Context);
+  const {
+    state: { selectedCurrency },
+  } = useCurrency();
   const {
     t,
     i18n: { language },

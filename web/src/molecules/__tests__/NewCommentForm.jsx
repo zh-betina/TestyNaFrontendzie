@@ -1,6 +1,7 @@
 import React from "react";
-import { screen, render } from "@testing-library/react";
 import user from "@testing-library/user-event";
+// eslint-disable-next-line import/no-unresolved
+import { render, screen } from "test-utils";
 import { NewCommentForm } from "../NewCommentForm";
 
 describe("<NewCommentForm />", () => {
@@ -10,14 +11,14 @@ describe("<NewCommentForm />", () => {
     const userName = "Piotr";
     const comment = "Te buty były super, polecam!";
 
-    const yourNameInput = screen.getByLabelText(/twoje imię/i);
-    const commentTextarea = screen.getByLabelText(/komentarz/i);
+    const yourNameInput = screen.getByLabelText(/your name/i);
+    const commentTextarea = screen.getByLabelText(/comment/i);
 
     user.type(yourNameInput, userName);
     user.type(commentTextarea, comment);
 
     const submitButton = screen.getByRole("button", {
-      name: /dodaj nowy/i,
+      name: /add a new one/i,
     });
 
     user.click(submitButton);

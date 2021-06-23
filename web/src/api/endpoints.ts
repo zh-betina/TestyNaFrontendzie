@@ -3,6 +3,7 @@ export const endpoints: { [key: string]: EndpointType } = {
   login: { url: "/authentication", method: "POST" },
   getProducts: { url: "/products", method: "GET" },
   getProduct: { url: "/products", method: "GET" },
+  getComments: { url: "/comments", method: "GET" },
 };
 
 export type EndpointType = {

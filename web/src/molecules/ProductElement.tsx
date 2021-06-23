@@ -7,29 +7,23 @@ import addToCartImage from "../assets/icons/add-to-cart.png";
 import removeFromCartImage from "../assets/icons/remove-from-cart.png";
 import Image from "../atoms/Image";
 import { displayPrice } from "../utils/money";
-import { useAppDispatch, useAppSelector } from "../state/store";
-import { addProduct, removeProduct } from "../state/cart";
+import { CartItem } from "../state/cart";
 
 type ProductElementProps = {
   product: Product;
+  cart: CartItem[];
+  addToCart: (prodId: string) => void;
+  removeFromCart: (prodId: string) => void;
 };
 
 export const ProductElement = ({
   product,
+  cart,
+  addToCart,
+  removeFromCart,
 }: ProductElementProps): JSX.Element => {
   const { i18n } = useTranslation();
   const history = useHistory();
-  const dispatch = useAppDispatch();
-  const cart = useAppSelector((state) => state.cart.items);
-
-  const addToCart = () => {
-    dispatch(addProduct({ productId: product._id }));
-  };
-
-  const removeFromCart = () => {
-    dispatch(removeProduct({ productId: product._id }));
-  };
-
   const inCart = cart.some((item) => item.id === product._id);
 
   return (
@@ -39,11 +33,11 @@ export const ProductElement = ({
       </NameContainer>
       <PriceContainer>{displayPrice(product.price)}</PriceContainer>
       {inCart ? (
-        <Button onClick={removeFromCart}>
+        <Button onClick={() => removeFromCart(product._id)}>
           <Image alt="removeFromCart" src={removeFromCartImage} />
         </Button>
       ) : (
-        <Button onClick={addToCart}>
+        <Button onClick={() => addToCart(product._id)}>
           <Image alt="addToCart" src={addToCartImage} />
         </Button>
       )}
