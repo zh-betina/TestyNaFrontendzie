@@ -10,7 +10,7 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended"
   ],
-  "plugins": ["@typescript-eslint", "react", "prettier", "cypress"],
+  "plugins": ["@typescript-eslint", "react", "prettier"],
   "rules": {
     "@typescript-eslint/ban-ts-comment": "off",
     "import/no-extraneous-dependencies": [
@@ -51,6 +51,5 @@
   "env": {
     "node": true,
     "jest": true,
-    "cypress/globals": true
   }
 }
