@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { findProductById } from "../mocks/getProducts";
 import { availableDiscounts, Discount } from "../types/Discount";
 import { Price } from "../types/Price";
+import { getProductById } from "../api/api";
 
 export interface CartItem {
   id: string;
@@ -40,7 +41,7 @@ const cartSlice = createSlice({
         });
         return { ...state, items };
       }
-      const prodToAdd = findProductById(action.payload.productId);
+      const prodToAdd = getProductById(action.payload.productId);
 
       if (!prodToAdd) {
         return state;

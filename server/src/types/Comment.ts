@@ -1,5 +1,5 @@
 export type Comment = {
-  id: string,
+  _id?: string,
   productId: string,
   owner: string,
   comment: string,

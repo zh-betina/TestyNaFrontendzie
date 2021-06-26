@@ -4,7 +4,7 @@ export default {
   before: {
     all: [],
     find: [],
-    get: [findComments()],
+    get: [],
     create: [],
     update: [],
     patch: [],

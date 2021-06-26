@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
+import { format } from "date-fns";
 import { CommentFormState, NewCommentForm } from "../molecules/NewCommentForm";
-import { getComments } from "../api/api";
+import { addComment, getComments } from "../api/api";
 import { Comment } from "../types/Comment";
 import Loader from "../atoms/Loader";
 
@@ -40,27 +41,42 @@ const CommentsWrapper = ({ productId }: CommentsWrapperProps): JSX.Element => {
     return <Loader />;
   }
 
-  return <Comments comments={comments} />;
+  return (
+    <Comments
+      setComments={setComments}
+      prodId={productId}
+      comments={comments}
+    />
+  );
 };
 type CommentsProps = {
   comments: Comment[];
+  setComments: Dispatch<SetStateAction<Comment[] | null>>;
+  prodId: string;
 };
-const Comments = ({ comments }: CommentsProps): JSX.Element => {
+const Comments = ({
+  setComments,
+  comments,
+  prodId,
+}: CommentsProps): JSX.Element => {
   const { t } = useTranslation();
   const [showAddNewCommentBox, setShowAddNewCommentBox] =
     useState<boolean>(false);
 
   const onSubmit = (commentForm: CommentFormState) => {
-    // setComments([
-    //   ...comments,
-    //   {
-    //     id: `${comments.length + 1}`,
-    //     productId,
-    //     comment: commentForm.comment,
-    //     owner: commentForm.userName,
-    //     date: format(new Date(), "yyyy-MM-dd HH:mm"),
-    //   },
-    // ]);
+    const date = format(new Date(), "yyyy-MM-dd HH:mm");
+
+    setComments([
+      ...comments,
+      {
+        id: `${comments.length + 1}`,
+        productId: prodId,
+        comment: commentForm.comment,
+        owner: commentForm.userName,
+        date,
+      },
+    ]);
+    addComment(prodId, commentForm, date);
     setShowAddNewCommentBox(false);
   };
 
