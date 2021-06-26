@@ -1,21 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ProductElement } from "../molecules/ProductElement";
 import Loader from "../atoms/Loader";
 import { Product } from "../types/Product";
-import { endpoints } from "../api/endpoints";
-import { useAxiosGet } from "../hooks/useAxiosGet";
 import { useAppDispatch, useAppSelector } from "../state/store";
 import { addProduct, removeProduct } from "../state/cart";
+import { fetchProducts } from "../state/products";
 
 export const Products = (): JSX.Element => {
-  const [data, loading, error] = useAxiosGet<{ data: Product[] }>(
-    endpoints.getProducts
+  const { products, loading, error } = useAppSelector(
+    (state) => state.products
   );
-  const products = data?.data;
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state) => state.cart.items);
 
-  if (loading || !data || !products) return <Loader />;
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
+
+  if (loading || !products) return <Loader />;
 
   if (error) return <div>Error! ${error}</div>;
 

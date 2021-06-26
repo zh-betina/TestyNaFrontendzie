@@ -15,6 +15,15 @@ const getProductById = async (id: string): Promise<Product | undefined> => {
   } = await axios(getProductEndpoint);
   return data ? data.find((elem: Product) => elem._id === id) : undefined;
 };
+
+const getProducts = async (): Promise<Product[]> => {
+  const getProductsEndpoint: EndpointType = endpoints.getProducts;
+
+  const {
+    data: { data },
+  } = await axios(getProductsEndpoint);
+  return data;
+};
 const getComments = async (prodId: string): Promise<Comment[] | undefined> => {
   const getCommentsEndpoint: EndpointType = {
     url: `${endpoints.getComments.url}/?productId=${prodId}`,
@@ -43,4 +52,4 @@ const addComment = async (
   return data._id;
 };
 
-export { getComments, getProductById, addComment };
+export { getComments, getProductById, addComment, getProducts };
