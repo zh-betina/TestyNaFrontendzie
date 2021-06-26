@@ -4,17 +4,17 @@ import Loader from "../atoms/Loader";
 import { Product } from "../types/Product";
 import { useAppDispatch, useAppSelector } from "../state/store";
 import { addProduct, removeProduct } from "../state/cart";
-import { fetchProducts } from "../state/products";
+import { fetchProducts } from "../state/cart";
 
 export const Products = (): JSX.Element => {
-  const { products, loading, error } = useAppSelector(
-    (state) => state.products
-  );
+  const { products, loading, error } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state) => state.cart.items);
 
   useEffect(() => {
-    dispatch(fetchProducts());
+    if (!products) {
+      dispatch(fetchProducts());
+    }
   }, []);
 
   if (loading || !products) return <Loader />;
@@ -29,7 +29,6 @@ export const Products = (): JSX.Element => {
     dispatch(removeProduct({ productId }));
   };
 
-  console.log("HERE: ", products);
   return (
     <div>
       {products.map((prod: Product) => {

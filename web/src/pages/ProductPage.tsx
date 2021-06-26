@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Container from "../templates/Container";
@@ -11,6 +11,8 @@ import { Name, Row } from "../atoms/Row";
 import NavigationButton from "../atoms/NavigationButton";
 import ListHeader from "../atoms/ListHeader";
 import { displayPrice } from "../utils/money";
+import { useAppDispatch, useAppSelector } from "../state/store";
+import { fetchProduct } from "../state/cart";
 
 type ProductPageParams = {
   id: string;
@@ -21,11 +23,19 @@ export const ProductPage = (): JSX.Element => {
     t,
     i18n: { language },
   } = useTranslation();
+  const dispatch = useAppDispatch();
   const { id } = useParams<ProductPageParams>();
-  const [data, loading, error] = useAxiosGet<Product>({
-    url: `${endpoints.getProduct.url}/${id}`,
-    method: endpoints.getProduct.method,
-  });
+
+  const { loading, error } = useAppSelector((state) => state.cart);
+  const data = useAppSelector((state) =>
+    state.cart.products?.find((elem) => elem._id === id)
+  );
+
+  useEffect(() => {
+    if (!data) {
+      dispatch(fetchProduct(id));
+    }
+  }, []);
 
   if (loading || !data) return <Loader />;
 

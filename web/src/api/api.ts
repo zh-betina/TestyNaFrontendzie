@@ -4,16 +4,14 @@ import { axios } from "./axios";
 import { Comment } from "../types/Comment";
 import { CommentFormState } from "../molecules/NewCommentForm";
 
-const getProductById = async (id: string): Promise<Product | undefined> => {
+const getProductById = async (id: string): Promise<Product> => {
   const getProductEndpoint: EndpointType = {
-    url: `${endpoints.getProduct}/${id}`,
+    url: `${endpoints.getProduct.url}/${id}`,
     method: endpoints.getProduct.method,
   };
 
-  const {
-    data: { data },
-  } = await axios(getProductEndpoint);
-  return data ? data.find((elem: Product) => elem._id === id) : undefined;
+  const { data } = await axios(getProductEndpoint);
+  return data;
 };
 
 const getProducts = async (): Promise<Product[]> => {
