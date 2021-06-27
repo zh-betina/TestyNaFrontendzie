@@ -1,8 +1,8 @@
-import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
-import { availableDiscounts, Discount } from "../types/Discount";
-import { Price } from "../types/Price";
-import { getProductById, getProducts } from "../api/api";
-import { Product } from "../types/Product";
+import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit';
+import { availableDiscounts, Discount } from '../types/Discount';
+import { Price } from '../types/Price';
+import { getProductById, getProducts } from '../api/api';
+import { Product } from '../types/Product';
 
 export interface CartItem {
   id: string;
@@ -29,13 +29,13 @@ const initialState: CartState = {
 };
 
 const cartSlice = createSlice({
-  name: "cart",
+  name: 'cart',
   initialState,
   reducers: {
     addProduct: (state, action: PayloadAction<{ productId: string }>) => {
       const productIdToAdd = action.payload.productId;
       const productAlreadyInCart = !!state.items.find(
-        (product) => product.id === productIdToAdd
+        (product) => product.id === productIdToAdd,
       );
 
       if (productAlreadyInCart) {
@@ -47,8 +47,9 @@ const cartSlice = createSlice({
         });
         return { ...state, items };
       }
+
       const prodToAdd = state.products?.find(
-        (elem) => elem._id === productIdToAdd
+        (elem) => elem._id === productIdToAdd,
       );
 
       if (!prodToAdd) {
@@ -73,7 +74,7 @@ const cartSlice = createSlice({
         .map((product) =>
           product.id === productIdToRemove
             ? { ...product, quantity: product.quantity - 1 }
-            : product
+            : product,
         )
         .filter((product) => product.quantity !== 0);
       return { ...state, items };
@@ -81,7 +82,7 @@ const cartSlice = createSlice({
     addDiscount: (state, action: PayloadAction<{ code: string }>) => {
       const appliedDiscount =
         availableDiscounts.find(
-          (discount) => discount.code === action.payload.code
+          (discount) => discount.code === action.payload.code,
         ) ?? null;
       return { ...state, appliedDiscount };
     },
@@ -90,7 +91,7 @@ const cartSlice = createSlice({
     },
     fetchProductsSuccess(
       state,
-      action: PayloadAction<{ products: Product[] }>
+      action: PayloadAction<{ products: Product[] }>,
     ) {
       state.products = action.payload.products;
       state.loading = false;

@@ -1,11 +1,11 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import styled from "styled-components";
-import { useTranslation } from "react-i18next";
-import { format } from "date-fns";
-import { CommentFormState, NewCommentForm } from "../molecules/NewCommentForm";
-import { addComment, getComments } from "../api/api";
-import { Comment } from "../types/Comment";
-import Loader from "../atoms/Loader";
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
+import { format } from 'date-fns';
+import { CommentFormState, NewCommentForm } from '../molecules/NewCommentForm';
+import { addComment, getComments } from '../api/api';
+import { Comment } from '../types/Comment';
+import Loader from '../atoms/Loader';
 
 type CommentsWrapperProps = {
   productId: string;
@@ -32,7 +32,7 @@ const CommentsWrapper = ({ productId }: CommentsWrapperProps): JSX.Element => {
     return (
       <div>
         {t(
-          "Something wrong happened with comments feature. Please try again later."
+          'Something wrong happened with comments feature. Please try again later.',
         )}
       </div>
     );
@@ -64,7 +64,7 @@ const Comments = ({
     useState<boolean>(false);
 
   const onSubmit = (commentForm: CommentFormState) => {
-    const date = format(new Date(), "yyyy-MM-dd HH:mm");
+    const date = format(new Date(), 'yyyy-MM-dd HH:mm');
 
     setComments([
       ...comments,
@@ -84,16 +84,20 @@ const Comments = ({
     <div>
       <CommentsContainer>
         {comments.length === 0 ? (
-          <div>{t("No comments yet")}</div>
+          <div>{t('No comments yet')}</div>
         ) : (
           comments.map((comment) => {
             return (
               <div key={comment.id}>
                 <CommentHeader>
-                  <OwnerName>{comment.owner}</OwnerName>
+                  <OwnerName data-testid="comment-owner-name">
+                    {comment.owner}
+                  </OwnerName>
                   <CommentDate>{comment.date}</CommentDate>
                 </CommentHeader>
-                <CommentBox>{comment.comment}</CommentBox>
+                <CommentBox data-testid="comment-content">
+                  {comment.comment}
+                </CommentBox>
               </div>
             );
           })
@@ -103,7 +107,7 @@ const Comments = ({
         <NewCommentForm submit={onSubmit} />
       ) : (
         <button type="button" onClick={() => setShowAddNewCommentBox(true)}>
-          {t("Add a new comment")}
+          {t('Add a new comment')}
         </button>
       )}
     </div>

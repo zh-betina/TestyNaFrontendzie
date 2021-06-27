@@ -13,7 +13,8 @@
     "test:e2e": "cd web && npm run e2e",
     "install:web": "cd web && npm install",
     "install:server": "cd server && npm install",
-    "install": "concurrently 'npm run install:*'"
+    "install": "concurrently 'npm run install:*'",
+    "resetDatabaseData": "cd server && npm run restartDatabase"
   },
   "devDependencies": {
     "concurrently": "^6.2.0"
