@@ -31,7 +31,8 @@
     "start:e2e": "npm run startLocalDB && npm start",
     "jest": "jest  --forceExit",
     "compile": "shx rm -rf lib/ && tsc",
-    "startLocalDB": "docker stop tnf-mongo 2> /dev/null|| true && docker rm tnf-mongo 2> /dev/null || true && docker run -p 27017:27017 --name tnf-mongo -d mongo && sleep 5 && .scripts/populateLocalMongo.bash"
+    "startLocalDB": "docker stop tnf-mongo 2> /dev/null|| true && docker rm tnf-mongo 2> /dev/null || true && docker run -p 27017:27017 --name tnf-mongo -d mongo && sleep 5 && .scripts/populateLocalMongo.bash",
+    "restartDatabase": ".scripts/populateLocalMongo.bash"
   },
   "standard": {
     "env": [
