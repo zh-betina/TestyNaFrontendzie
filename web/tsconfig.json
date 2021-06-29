@@ -21,7 +21,7 @@
       "test-utils": ["./testsUtils/test-utils"]
     },
     "types": [
-      "cypress", "@testing-library/cypress"
+      "cypress", "@testing-library/cypress", "cypress-plugin-stripe-elements"
     ]
   },
   "include": [
