@@ -36,5 +36,6 @@
   "about {value} months": "about {{value}} months",
   "free": "free",
   "No comments yet": "No comments yet",
-  "Something wrong happened with comments feature. Please try again later.": "Something wrong happened with comments feature. Please try again."
+  "Something wrong happened with comments feature. Please try again later.": "Something wrong happened with comments feature. Please try again.",
+  "paymentError": "Payment was unsuccessful"
 }

@@ -5,6 +5,7 @@ export const endpoints: { [key: string]: EndpointType } = {
   getProduct: { url: "/products", method: "GET" },
   getComments: { url: "/comments", method: "GET" },
   addComment: { url: "/comments", method: "POST" },
+  postCart: { url: "/cart", method: "POST" },
 };
 
 export type EndpointType = {

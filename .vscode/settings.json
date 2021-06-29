@@ -1,0 +1,8 @@
+{
+  "eslint.workingDirectories": [
+    "web",
+    "server"
+  ],
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.formatOnSave": true
+}

@@ -36,6 +36,6 @@
     "about {value} months": "około {{value}} miesięcy",
     "free": "darmowa",
     "No comments yet": "Nie ma jeszcze żadnych komentarzy",
-    "Something wrong happened with comments feature. Please try again later.": "Moduł komentarzy nie działa. Proszę spróbuj ponownie później."
-
+    "Something wrong happened with comments feature. Please try again later.": "Moduł komentarzy nie działa. Proszę spróbuj ponownie później.",
+    "paymentError": "Płatność nie powiodła się"
 }
