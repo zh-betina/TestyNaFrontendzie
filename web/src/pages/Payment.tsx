@@ -87,6 +87,7 @@ const Payment = (): JSX.Element => {
       const cardElement = elements.getElement(CardElement);
 
       if (!cardElement) {
+        // @ts-ignore
         throw new Error("Card element not rendered");
       }
 

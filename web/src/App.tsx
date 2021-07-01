@@ -8,19 +8,23 @@ import { AppRoutes } from "./AppRoutes";
 import { CurrencyProvider } from "./currencyContext/CurrencyContext";
 import { CurrencyChanger } from "./molecules/CurrencyChanger";
 import store from "./state/store";
+import { UserProvider } from "./userContext/UserContext";
 
 const stripePromise = loadStripe(
-  "pk_test_51HXAhqFNsYuREmdu37vlbCAbIQKLjh4PZKbvsiyVlxRf8NUPwvwJLFj8Jw8POX4mx3g7muxKA5ssyBNcLaFvml6B00MH1eNLXl",
+  // @ts-ignore
+  __SNOWPACK_ENV__.SNOWPACK_PUBLIC_STRIPE_PUBLIC || "",
 );
 
 function App(): JSX.Element {
   return (
     <Provider store={store}>
       <CurrencyProvider>
-        <Elements stripe={stripePromise}>
-          <CurrencyChanger />
-          <AppRoutes />
-        </Elements>
+        <UserProvider>
+          <Elements stripe={stripePromise}>
+            <CurrencyChanger />
+            <AppRoutes />
+          </Elements>
+        </UserProvider>
       </CurrencyProvider>
     </Provider>
   );

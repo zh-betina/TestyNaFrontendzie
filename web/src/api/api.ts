@@ -6,6 +6,7 @@ import { CommentFormState } from "../molecules/NewCommentForm";
 import { Address } from "../types/Address";
 import { Currency } from "../types/Currency";
 import { ShipmentMethod } from "../types/ShipmentMethod";
+import { setCurrentUser } from "../authentication/setCurrentUser";
 
 const getProductById = async (id: string): Promise<Product> => {
   const getProductEndpoint: EndpointType = {
@@ -65,4 +66,30 @@ const payForCart = async (body: {
   return data.clientSecret;
 };
 
-export { getComments, getProductById, addComment, getProducts, payForCart };
+const login = async (body: {
+  email: string;
+  password: string;
+}): Promise<{ success: boolean; accessToken: string }> => {
+  const { data } = await axios<{
+    accessToken: string;
+    authentication: { payload: { exp: number } };
+  }>(endpoints.login, {
+    data: { ...body, strategy: "local" },
+  });
+
+  setCurrentUser({
+    accessToken: data.accessToken,
+    exp: data.authentication.payload.exp,
+  });
+
+  return { success: true, accessToken: data.accessToken };
+};
+
+export {
+  getComments,
+  getProductById,
+  addComment,
+  getProducts,
+  payForCart,
+  login,
+};

@@ -1,14 +1,13 @@
-import { authenticate } from '@feathersjs/authentication';
 
 export default {
   before: {
     all: [],
     find: [],
     get: [],
-    create: [authenticate('jwt')],
-    update: [authenticate('jwt')],
-    patch: [authenticate('jwt')],
-    remove: [authenticate('jwt')],
+    create: [],
+    update: [],
+    patch: [],
+    remove: []
   },
 
   after: {
@@ -18,7 +17,7 @@ export default {
     create: [],
     update: [],
     patch: [],
-    remove: [],
+    remove: []
   },
 
   error: {
@@ -28,6 +27,6 @@ export default {
     create: [],
     update: [],
     patch: [],
-    remove: [],
-  },
+    remove: []
+  }
 };
