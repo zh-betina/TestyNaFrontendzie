@@ -3,8 +3,9 @@ import { setupServer } from "msw/node";
 import { API_URL } from "../api/axios";
 
 export const server = setupServer(
-  rest.get(`${API_URL}/comments/:prodId`, (req, res, ctx) => {
-    const { prodId } = req.params;
+  rest.get(`${API_URL}/comments/`, (req, res, ctx) => {
+    const query = req.url.searchParams;
+    const prodId = query.get("productId");
     let result = [];
 
     switch (prodId) {
@@ -35,6 +36,6 @@ export const server = setupServer(
         break;
     }
 
-    return res(ctx.json(result));
-  })
+    return res(ctx.json({ data: result }));
+  }),
 );

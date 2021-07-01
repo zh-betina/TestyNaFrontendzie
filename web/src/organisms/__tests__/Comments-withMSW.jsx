@@ -24,9 +24,9 @@ describe("<Comments/>", () => {
     await waitFor(() =>
       expect(
         screen.getByText(
-          "Something wrong happened with comments feature. Please try again."
-        )
-      )
+          "Something wrong happened with comments feature. Please try again.",
+        ),
+      ),
     );
   });
 });

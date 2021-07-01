@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import { Cell, Name, Row } from "../atoms/Row";
-import ListElement from "../molecules/ListElement";
-import { displayPrice } from "../utils/money";
+import { Cell, Name, Row } from "../../atoms/Row";
+import ListElement from "../../molecules/ListElement";
+import { displayPrice } from "../../utils/money";
 
-import { getDiscountedSum } from "../state/selectors";
-import { CartItem, addProduct, removeProduct } from "../state/cart";
-import DiscountRow from "../molecules/DiscountRow";
-import SumRow from "../molecules/SumRow";
-import { useAppDispatch, useAppSelector } from "../state/store";
+import { getDiscountedSum } from "../../state/selectors";
+import { CartItem, addProduct, removeProduct } from "../../state/cart";
+import DiscountRow from "../../molecules/DiscountRow";
+import SumRow from "../../molecules/SumRow";
+import { useAppDispatch, useAppSelector } from "../../state/store";
 
 const List = styled.section`
   padding-bottom: 10px;
@@ -50,7 +50,7 @@ const CartList = (): JSX.Element => {
       <DiscountRow />
       <Row>
         <Name>{t("To pay")}:</Name>
-        <Cell>{displayPrice(discounted)}</Cell>
+        <Cell data-testid="toPay">{displayPrice(discounted)}</Cell>
       </Row>
     </>
   );
