@@ -68,14 +68,18 @@ const Payment = (): JSX.Element => {
 
   const cart = useAppSelector((state) => state.cart.items);
   const address = useAppSelector((state) => state.delivery.address);
+  const shipmentMethod = useAppSelector(
+    (state) => state.delivery.shipmentMethod,
+  );
 
   const handlePayment = async () => {
-    if (!stripe || !elements) {
+    if (!stripe || !elements || !shipmentMethod) {
       return;
     }
     try {
       const clientSecret = await payForCart({
         products: cart.map((item) => item.id),
+        shipmentMethod: shipmentMethod.type,
         address,
         currency: selectedCurrency,
       });

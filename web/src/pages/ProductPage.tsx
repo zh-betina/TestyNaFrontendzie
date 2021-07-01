@@ -2,9 +2,6 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Container from "../templates/Container";
-import { useAxiosGet } from "../hooks/useAxiosGet";
-import { endpoints } from "../api/endpoints";
-import { Product } from "../types/Product";
 import Loader from "../atoms/Loader";
 import { CommentsWrapper } from "../organisms/Comments";
 import { Name, Row } from "../atoms/Row";
@@ -28,7 +25,7 @@ export const ProductPage = (): JSX.Element => {
 
   const { loading, error } = useAppSelector((state) => state.cart);
   const data = useAppSelector((state) =>
-    state.cart.products?.find((elem) => elem._id === id)
+    state.cart.products?.find((elem) => elem._id === id),
   );
 
   useEffect(() => {

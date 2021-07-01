@@ -5,6 +5,7 @@ import { Comment } from "../types/Comment";
 import { CommentFormState } from "../molecules/NewCommentForm";
 import { Address } from "../types/Address";
 import { Currency } from "../types/Currency";
+import { ShipmentMethod } from "../types/ShipmentMethod";
 
 const getProductById = async (id: string): Promise<Product> => {
   const getProductEndpoint: EndpointType = {
@@ -54,6 +55,7 @@ const addComment = async (
 const payForCart = async (body: {
   products: string[];
   address: Address | null;
+  shipmentMethod: ShipmentMethod["type"];
   currency: Currency;
 }): Promise<string> => {
   const { data } = await axios<{ clientSecret: string }>(endpoints.postCart, {

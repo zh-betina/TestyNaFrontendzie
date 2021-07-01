@@ -6,7 +6,7 @@ export const API_URL = "http://localhost:3030";
 
 export const axios = <T>(
   endpoint: EndpointType,
-  config?: AxiosRequestConfig
+  config?: AxiosRequestConfig,
 ) => {
   return originalAxios.request<T>({
     method: endpoint.method,

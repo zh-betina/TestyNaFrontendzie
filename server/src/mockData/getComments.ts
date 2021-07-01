@@ -1,5 +1,5 @@
-import {Comments} from '../services/comments/comments.class';
-import {Comment} from '../types/Comment';
+import { Comments } from '../services/comments/comments.class';
+import { Comment } from '../types/Comment';
 
 const comments: Comment[] = [
   {

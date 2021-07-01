@@ -4,6 +4,7 @@ import { Db, ObjectId } from 'mongodb';
 import Stripe from 'stripe';
 import { CartData } from '../../types/Cart';
 import { Product } from '../../types/Product';
+import { calculateShipmentPrice, shipmentMethods } from './shipmentMethods';
 
 if (process.env.STRIPE_SECRET == null) {
   throw new Error('Stripe is not configured');
@@ -37,8 +38,14 @@ export class Cart extends Service {
       return sum;
     }, 0);
 
+    const shipmentPrice = calculateShipmentPrice(
+      data.shipmentMethod,
+      price,
+      data.currency,
+    );
+
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: price,
+      amount: price + shipmentPrice,
       currency: data.currency,
     });
 

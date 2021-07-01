@@ -5,7 +5,6 @@ import { EndpointType } from "../api/endpoints";
 
 export function useAxiosGet<T>(
   endpoint: EndpointType,
-  forceNotMock?: boolean
 ): [T | undefined, boolean, any, Dispatch<SetStateAction<T | undefined>>] {
   const [data, setData] = useState(undefined);
   const [loading, setLoading] = useState(true);
@@ -23,7 +22,7 @@ export function useAxiosGet<T>(
         };
       }
       if (!loading) setLoading(true);
-      await axios(endpoint, config, forceNotMock)
+      await axios(endpoint, config)
         .then((result) => {
           setData(result.data);
           setLoading(false);
