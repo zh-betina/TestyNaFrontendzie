@@ -3,8 +3,7 @@ import { ProductElement } from "../molecules/ProductElement";
 import Loader from "../atoms/Loader";
 import { Product } from "../types/Product";
 import { useAppDispatch, useAppSelector } from "../state/store";
-import { addProduct, removeProduct } from "../state/cart";
-import { fetchProducts } from "../state/cart";
+import { addProduct, removeProduct, fetchProducts } from "../state/cart";
 
 export const Products = (): JSX.Element => {
   const { products, loading, error } = useAppSelector((state) => state.cart);

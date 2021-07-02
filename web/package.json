@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.tsx",
   "scripts": {
+    "dev": "npm start",
     "start": "snowpack dev --polyfill-node --port 3000",
     "start:e2e": "snowpack dev --polyfill-node --port 3000 --open none",
     "build": "snowpack build",
@@ -12,7 +13,8 @@
     "lint": "eslint ..",
     "lint:fix": "eslint --fix ..",
     "e2e": "cypress open",
-    "e2e:run": "cypress run"
+    "e2e:run": "cypress run",
+    "cypress:install": "cypress install"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.0",

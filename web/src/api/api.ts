@@ -1,4 +1,4 @@
-import { Product } from "../types/Product";
+import { NewProduct, Product } from "../types/Product";
 import { endpoints, EndpointType } from "./endpoints";
 import { axios } from "./axios";
 import { Comment } from "../types/Comment";
@@ -7,6 +7,7 @@ import { Address } from "../types/Address";
 import { Currency } from "../types/Currency";
 import { ShipmentMethod } from "../types/ShipmentMethod";
 import { setCurrentUser } from "../authentication/setCurrentUser";
+import { getCurrentUser } from "../authentication/getCurrentUser";
 
 const getProductById = async (id: string): Promise<Product> => {
   const getProductEndpoint: EndpointType = {
@@ -85,6 +86,17 @@ const login = async (body: {
   return { success: true, accessToken: data.accessToken };
 };
 
+const removeProduct = async (id: string) => {
+  await axios({
+    url: `${endpoints.removeProduct.url}/${id}`,
+    method: endpoints.removeProduct.method,
+  });
+};
+
+const createProduct = async (prod: NewProduct) => {
+  await axios(endpoints.createProduct, { data: prod });
+};
+
 export {
   getComments,
   getProductById,
@@ -92,4 +104,6 @@ export {
   getProducts,
   payForCart,
   login,
+  removeProduct,
+  createProduct,
 };
