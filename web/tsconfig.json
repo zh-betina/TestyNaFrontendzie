@@ -28,6 +28,5 @@
     "src",
     "./index.d.ts",
     "../server/node_modules/@types/jest/index.d.ts",
-    "cypress"
   ]
 }
