@@ -13,13 +13,16 @@
     "dev:server": "cd server && npm run dev",
     "dev:web": "cd web && npm run dev",
     "dev": "concurrently 'npm run dev:*'",
-    "test:e2e": "cd web && npm run e2e",
+    "e2e:test": "cd web && npm run e2e",
     "install:web": "cd web && npm install",
     "install:server": "cd server && npm install",
     "install": "concurrently 'npm run install:*'",
-    "resetDatabaseData": "cd server && npm run restartDatabase"
+    "resetDatabaseData": "cd server && npm run restartDatabase",
+    "test": "cd web && npm run test",
+    "prepare": "husky install"
   },
   "devDependencies": {
-    "concurrently": "^6.2.0"
+    "concurrently": "^6.2.0",
+    "husky": "^7.0.1"
   }
 }
