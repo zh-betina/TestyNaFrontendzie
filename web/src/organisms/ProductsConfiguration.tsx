@@ -9,7 +9,13 @@ import Button from "../atoms/Button";
 import { displayPrice } from "../utils/money";
 import { removeProduct } from "../api/api";
 
-export const ProductsConfiguration = () => {
+type ProductsConfigurationPropsType = {
+  onEdit: (id: string) => void;
+};
+
+export const ProductsConfiguration = ({
+  onEdit,
+}: ProductsConfigurationPropsType) => {
   const {
     t,
     i18n: { language },
@@ -45,6 +51,12 @@ export const ProductsConfiguration = () => {
               <span>{displayPrice(prod.price)}</span>
             </DetailsContainer>
             <ButtonsContainer>
+              <Button
+                data-testid={`edit-button-${prod._id}`}
+                onClick={() => onEdit(prod._id)}
+              >
+                {t("Edit")}
+              </Button>
               <Button onClick={() => onRemove(prod._id)}>{t("Remove")}</Button>
             </ButtonsContainer>
           </ProductContainer>

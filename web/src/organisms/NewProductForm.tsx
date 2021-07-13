@@ -1,20 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import Button from "../atoms/Button";
-import { NewProduct, Product } from "../types/Product";
+import { NewProduct } from "../types/Product";
 import Input from "../atoms/Input";
 import { Currency } from "../types/Currency";
-import { createProduct } from "../api/api";
-import { useAppDispatch } from "../state/store";
+import { createProduct, updateProduct } from "../api/api";
+import { useAppDispatch, useAppSelector } from "../state/store";
 import { fetchProducts } from "../state/cart";
+import Loader from "../atoms/Loader";
 
 type Props = {
   onSubmit: () => void;
+  mode: "edit" | "new";
+  prodId?: string;
 };
-export const NewProductForm = ({ onSubmit }: Props) => {
+export const NewProductForm = ({ onSubmit, mode, prodId }: Props) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const { loading, error } = useAppSelector((state) => state.cart);
+  const data = useAppSelector((state) =>
+    state.cart.products?.find((elem) => elem._id === prodId),
+  );
   const [newProdForm, setNewProdForm] = useState<NewProduct>({
     name: { pl: "", en: "" },
     brand: "",
@@ -25,8 +32,28 @@ export const NewProductForm = ({ onSubmit }: Props) => {
     ],
   });
 
+  useEffect(() => {
+    if (mode === "edit" && data) {
+      setNewProdForm({
+        name: data.name,
+        brand: data.brand,
+        price: data.price,
+      });
+    }
+  }, [data]);
+
+  if (mode === "edit") {
+    if (loading || !data) return <Loader />;
+
+    if (error) return <div>Error! ${error}</div>;
+  }
+
   const onSave = async () => {
-    await createProduct(newProdForm);
+    if (mode === "new") {
+      await createProduct(newProdForm);
+    } else if (prodId) {
+      await updateProduct(prodId, newProdForm);
+    }
     dispatch(fetchProducts());
     onSubmit();
   };

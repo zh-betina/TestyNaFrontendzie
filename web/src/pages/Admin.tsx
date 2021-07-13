@@ -11,7 +11,11 @@ import { NewProductForm } from "../organisms/NewProductForm";
 
 const Admin = () => {
   const { t } = useTranslation();
-  const [addNewProductOpen, setAddNewProductOpen] = useState<boolean>(false);
+  const [addNewProductOpen, setAddNewProductOpen] = useState<{
+    open: boolean;
+    mode: "edit" | "new";
+    prodId?: string;
+  }>({ open: false, mode: "new" });
   const {
     state: { user },
   } = useUser();
@@ -24,12 +28,20 @@ const Admin = () => {
     );
   }
 
+  const toggleProductForm = (mode: "new" | "edit", prodId?: string) => {
+    setAddNewProductOpen({ open: !addNewProductOpen.open, mode, prodId });
+  };
+
   const onNewProductOpen = () => {
-    setAddNewProductOpen(!addNewProductOpen);
+    toggleProductForm("new");
+  };
+
+  const onEdit = (id: string) => {
+    toggleProductForm("edit", id);
   };
 
   const onNewProductSubmit = () => {
-    setAddNewProductOpen(false);
+    toggleProductForm("new");
   };
 
   return (
@@ -40,12 +52,16 @@ const Admin = () => {
           <Logout />
         </LogoutContainer>
         <ProductsContainer>
-          <ProductsConfiguration />
+          <ProductsConfiguration onEdit={onEdit} />
         </ProductsContainer>
       </StyledContainer>
-      {addNewProductOpen && (
+      {addNewProductOpen.open && (
         <Container>
-          <NewProductForm onSubmit={onNewProductSubmit} />
+          <NewProductForm
+            prodId={addNewProductOpen.prodId}
+            mode={addNewProductOpen.mode}
+            onSubmit={onNewProductSubmit}
+          />
         </Container>
       )}
     </>

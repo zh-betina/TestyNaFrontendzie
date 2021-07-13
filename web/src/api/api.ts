@@ -97,6 +97,16 @@ const createProduct = async (prod: NewProduct) => {
   await axios(endpoints.createProduct, { data: prod });
 };
 
+const updateProduct = async (prodId: string, prod: NewProduct) => {
+  await axios(
+    {
+      ...endpoints.updateProduct,
+      url: `${endpoints.updateProduct.url}/${prodId}`,
+    },
+    { data: prod },
+  );
+};
+
 export {
   getComments,
   getProductById,
@@ -106,4 +116,5 @@ export {
   login,
   removeProduct,
   createProduct,
+  updateProduct,
 };

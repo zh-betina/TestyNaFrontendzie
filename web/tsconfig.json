@@ -28,6 +28,7 @@
     "src",
     "./index.d.ts",
     "../server/node_modules/@types/jest/index.d.ts",
-    "cypress"
+    "cypress",
+    "../../../../Library/Application Support/JetBrains/WebStorm2021.1/javascript/extLibs/global-types/node_modules/@types/jest/index.d.ts"
   ]
 }
