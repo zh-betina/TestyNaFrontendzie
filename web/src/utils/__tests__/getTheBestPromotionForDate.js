@@ -28,15 +28,11 @@ const promotions = [
   },
 ];
 
+const fakeTodayDate = new Date("2022-08-14");
+
 describe("getTheBestPromotionForDate", () => {
-  it("should return null if no current promotions available for the given date", () => {
-    const result = getTheBestPromotionForDate(new Date(), promotion);
-
-    expect(result).toBeNull();
-  });
-
   it("should return the best available promotion for the given date", () => {
-    const result = getTheBestPromotionForDate(new Date(), promotions);
+    const result = getTheBestPromotionForDate(fakeTodayDate, promotions);
 
     expect(result).toEqual(
       expect.objectContaining({
@@ -48,8 +44,14 @@ describe("getTheBestPromotionForDate", () => {
     );
   });
 
+  it("should return null if no current promotions available for the given date", () => {
+    const result = getTheBestPromotionForDate(fakeTodayDate, promotion);
+
+    expect(result).toBeNull();
+  });
+
   it("should return null if no promotions at all available at the moment", ()=> {
-    const result = getTheBestPromotionForDate(new Date(), []);
+    const result = getTheBestPromotionForDate(fakeTodayDate, []);
     
     expect(result).toBeNull();
   });
