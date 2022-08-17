@@ -26,12 +26,12 @@ export const getPromotionDuration = (
   if (daysDifference > 2)
     return {
       type: PromotionDurationType.days,
-      value: daysDifference,
+      value: Math.floor(daysDifference),
     };
 
   const hours = daysDifference * 24;
   if (hours >= 12) {
-    return { type: PromotionDurationType.hours, value: hours };
+    return { type: PromotionDurationType.hours, value: Math.floor(hours) };
   }
 
   return getDurationInTime(startDate, endDate);
