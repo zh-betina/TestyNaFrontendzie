@@ -13,17 +13,35 @@ const promotionMock = {
     }
 };
 
-const datesForWeeks = [new Date("2022-08-01T12:00:00"), new Date("2022-08-30T12:00:00")];
+const datesForWeeks = {
+    dateStart: new Date("2022-08-01T12:00:00"),
+    dateEnd: new Date("2022-08-30T12:00:00")
+};
 
-const datesForMonths = [new Date("2022-08-01T12:00:00"), new Date("2022-11-01T12:00:00")];
+const datesForMonths = {
+    dateStart: new Date("2022-08-01T12:00:00"),
+    dateEnd: new Date("2022-11-01T12:00:00")
+};
 
-const datesForHours= [new Date("2022-08-01T12:00:00"), new Date("2022-08-17T18:30:00")];
+const datesForHours= {
+    dateStart: new Date("2022-08-01T12:00:00"),
+    dateEnd: new Date("2022-08-17T18:30:00")
+};
 
-const datesForFewHours = [new Date("2022-08-01T12:00:00"), new Date("2022-08-17T05:00:00")];
+const datesForFewHours = {
+    dateStart: new Date("2022-08-01T12:00:00"), 
+    dateEnd: new Date("2022-08-17T05:00:00")
+};
 
-const datesForExpiredPromo = [new Date("2021-05-01T12:00:00"), new Date("2021-07-01T12:00:00")];
+const datesForExpiredPromo = {
+    dateStart: new Date("2021-05-01T12:00:00"),
+    dateEnd: new Date("2021-07-01T12:00:00")
+};
 
-const datesForDays = [new Date("2022-08-01T12:00:00"), new Date("2022-08-20T12:00:00")];
+const datesForDays = {
+    dateStart: new Date("2022-08-01T12:00:00"),
+    dateEnd: new Date("2022-08-20T12:00:00")
+};
 
 describe("<PromotionDuration />", ()=> {
     beforeEach(()=> {
@@ -32,15 +50,17 @@ describe("<PromotionDuration />", ()=> {
     });
 
     it.each`
-        dateStart | dateEnd | timeMeasure | expectedNumeralVal
-        ${datesForDays[0]} | ${datesForDays[1]} | ${"days"} | ${3}
-        ${datesForWeeks[0]} | ${datesForWeeks[1]} | ${"weeks"} | ${2}
-        ${datesForMonths[0]} | ${datesForMonths[1]} | ${"months"} | ${3}
-        ${datesForHours[0]} | ${datesForHours[1]} | ${"hours"} | ${16}
-        ${datesForFewHours[0]} | ${datesForFewHours[1]} | ${"3:19:42"} | ${null}
-        ${datesForExpiredPromo[0]} | ${datesForExpiredPromo[1]} | ${"promotion already finished"} | ${null} 
-    `("should nanana", ({dateStart, dateEnd, timeMeasure, expectedNumeralVal})=> {
-        const customizedPromotionMock = { ...promotionMock, dateStart: dateStart, dateEnd: dateEnd};
+        dates | timeMeasure | expectedNumeralVal
+        ${datesForDays} | ${"days"} | ${3}
+        ${datesForWeeks} | ${"weeks"} | ${2}
+        ${datesForMonths} | ${"months"} | ${3}
+        ${datesForHours} | ${"hours"} | ${16}
+        ${datesForFewHours} | ${"3:19:42"} | ${null}
+        ${datesForExpiredPromo} | ${"promotion already finished"} | ${null} 
+    `("checks if the right promotion duration is displayed when it starts $dateStart and ends $dateEnd",
+    ({ dates, timeMeasure, expectedNumeralVal })=> {
+        const customizedPromotionMock = { ...promotionMock, ...dates };
+        
         render(
             <I18nextProvider i18n={i18n}>
                 <PromotionDuration promotion={customizedPromotionMock}/>

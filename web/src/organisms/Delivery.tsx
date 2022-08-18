@@ -43,6 +43,7 @@ const Delivery = (): JSX.Element => {
             <Name>
               <label htmlFor={method.type}>
                 <input
+                  data-testid={method.type}
                   type="radio"
                   name="shipment"
                   id={method.type}
