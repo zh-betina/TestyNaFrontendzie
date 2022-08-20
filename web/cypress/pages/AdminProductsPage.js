@@ -32,13 +32,6 @@ class AdminProductsPage {
     return this;
   }
 
-  verifyIfAdded(newProduct) {
-    cy.contains("Products");
-    cy.contains(newProduct);
-
-    return this;
-  }
-
   logout() {
     cy.findByRole("button", { name: "Logout" }).click();
 

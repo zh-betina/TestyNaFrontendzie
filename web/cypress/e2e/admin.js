@@ -1,8 +1,30 @@
 import AdminLoginPage from "../pages/AdminLoginPage";
 import AdminProductsPage from "../pages/AdminProductsPage";
 
+const adminLoginPageTest = () => {
+  cy.visit("/admin");
+  const adminLoginPage = new AdminLoginPage();
+  return adminLoginPage
+    .typeCredentials("admin@admin.com", "admin")
+    .login()
+    .checkIfRedirectedToAdminPanel();
+};
+
 describe("admin", () => {
-  it("checks admin adding and removing products", () => {
+  before(() => {
+    cy.exec("cd .. && npm run resetDatabaseData");
+  });
+
+  beforeEach(() => {
+    adminLoginPageTest();
+  });
+
+  it("logs in and logs out the admin", () => {
+    const adminLoginPage = new AdminLoginPage();
+    adminLoginPage.logout().checkIfLoggedOut();
+  });
+
+  it("allows admin to add and remove products", () => {
     const newProduct = {
       namePL: "Długa sukienka",
       nameENG: "Maxi dress",
@@ -14,11 +36,6 @@ describe("admin", () => {
 
     const productNameToRemove = "Sweatpants - Nike";
 
-    cy.visit("/admin");
-
-    const adminLoginPage = new AdminLoginPage();
-    adminLoginPage.typeCredentials("admin@admin.com", "admin").login();
-
     const adminProductsPage = new AdminProductsPage();
     adminProductsPage
       .removeProduct(productNameToRemove)
@@ -26,7 +43,8 @@ describe("admin", () => {
 
     const productsPage = adminProductsPage
       .addNew(newProduct)
-      .verifyIfAdded(`${newProduct.nameENG} - ${newProduct.brand}`)
+      .verifyExistence(`${newProduct.nameENG} - ${newProduct.brand}`, true)
+      .verifyExistence("Products", true)
       .logout();
 
     productsPage
